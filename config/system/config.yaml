@@ -1,0 +1,20 @@
+#详细内容请查看说明
+
+calcLiang: true
+calcLiangQ: false
+calcLi: false
+artisLiang: false
+artisLiangZ: false
+
+autoRefresh: true
+panelmodel: 1
+namemodel: 1
+rankingOnemodel: m
+rankingTwomodel: hps
+rankingThreemodel: dps
+
+technique: 0
+energymodel: 0
+bndOfLifePlus: 0
+bndOfLifePct: 1
+
