@@ -24,6 +24,7 @@ export const details = [
 {
   title: `${TalentName.eName}盾量`,
   params: { HealNumber: 1, ShieldTime: 2 },
+  dmgKey: 'h',
   dmg: ({ talent, calc, attr }, { shield }) => shield(talent.e['吸收量2'][0] * calc(attr.def) / 100 + talent.e['吸收量2'][1] * 1)
 },
 {
@@ -45,7 +46,7 @@ export const details = [
 {
   title: `${TalentName.qNameT}后${TalentName.aName}四段`,
   params: { Sweeping_Time: true, BurstUse: 1, BurstHit: 1, BurstDmg: 1, NormalUse: 4, NormalHit: 4, NormalDmg: 4, ShieldTime: 6, NormalElement: 4 },
-  dmgKey: 'z',
+  dmgKey: 'a',
   dmg: ({ talent }, dmg) => dmg(talent.a['四段伤害'], 'a')
 },
 {

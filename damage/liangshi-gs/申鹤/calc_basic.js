@@ -27,7 +27,6 @@ export const details = [
 {
   title: `${TalentName.eName}点按融化`,
   params: { FireAttachment: true },
-  dmgKey: 'e',
   dmg: ({ talent }, dmg) => dmg(talent.e['点按技能伤害'], 'e', 'melt')
 },
 {

@@ -54,6 +54,7 @@ export const details = [
 {
   title: `${TalentName.qName}每跳治疗`,
   params: { EnergyDetermine: 0, BurstUse: 1, BurstHit: 1, BurstDmg: 1, HealNumber: 2 },
+  dmgKey: 'h',
   dmg: ({ attr, calc, talent }, { heal }) => heal(talent.q['持续治疗2'][0] * calc(attr.hp) / 100 + talent.q['持续治疗2'][1] * 1)
 },
 {

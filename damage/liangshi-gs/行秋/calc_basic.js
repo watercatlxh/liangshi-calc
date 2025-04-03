@@ -69,7 +69,6 @@ export const details = [
 },
 {
   title: `${TalentName.qName}单段蒸发`,
-  dmgKey: 'q',
   params: { Rainbow_Bladework: true, BurstUse: 1, BurstHit: 3, BurstDmg: 3, FireAttachment: true },
   dmg: ({ talent }, dmg) => dmg(talent.q['剑雨伤害'], 'q', 'vaporize')
 },

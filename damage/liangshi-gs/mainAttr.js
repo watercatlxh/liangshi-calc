@@ -4,6 +4,7 @@ export const mainAttrData = {
   "埃洛伊": 'atk,cpct,cdmg,dmg,mastery',
   "艾尔海森": 'atk,cpct,cdmg,dmg,mastery',
   "艾梅莉埃": 'atk,cpct,cdmg,dmg,mastery',
+  "爱可菲": 'atk,cpct,cdmg,mastery,heal',
   "安柏": 'atk,cpct,cdmg,dmg,mastery',
   "八重神子": 'atk,cpct,cdmg,dmg,mastery',
   "芭芭拉": 'hp,atk,cpct,cdmg,heal',
@@ -90,19 +91,20 @@ export const mainAttrData = {
   "瑶瑶": 'hp,atk,cpct,cdmg,heal',
   "夜兰": 'hp,cpct,cdmg,mastery,dmg',
   "伊安珊": 'atk,cpct,cdmg,mastery,dmg',
+  "伊法": 'atk,cpct,cdmg,mastery,heal',
   "优菈": 'atk,cpct,cdmg,phy,dmg',
   "云堇": 'def,atk,cpct,cdmg,dmg',
   "早柚": 'atk,cpct,cdmg,mastery,heal',
   "钟离": 'hp,atk,cpct,cdmg,dmg',
   "重云": 'atk,cpct,cdmg,mastery,dmg',
 
-  "无元素": 'atk,cpct,cdmg,phy,dmg',
-  "风元素": 'atk,cpct,cdmg,mastery,dmg',
-  "岩元素": 'atk,cpct,cdmg,mastery,dmg',
-  "雷元素": 'atk,cpct,cdmg,dmg,recharge',
-  "草元素": 'atk,cpct,cdmg,mastery,dmg',
-  "水元素": 'hp,atk,cpct,cdmg,dmg',
-  "火元素": 'atk,cpct,cdmg,mastery,dmg',
-  "冰元素": 'atk,cpct,cdmg,mastery,dmg'
+  "旅行者/null": 'atk,cpct,cdmg,phy,dmg',
+  "旅行者/anemo": 'atk,cpct,cdmg,mastery,dmg',
+  "旅行者/geo": 'atk,cpct,cdmg,mastery,dmg',
+  "旅行者/electro": 'atk,cpct,cdmg,dmg,recharge',
+  "旅行者/dendro": 'atk,cpct,cdmg,mastery,dmg',
+  "旅行者/hydro": 'hp,atk,cpct,cdmg,dmg',
+  "旅行者/pyro": 'atk,cpct,cdmg,mastery,dmg',
+  "旅行者/cryo": 'atk,cpct,cdmg,mastery,dmg'
 
 }

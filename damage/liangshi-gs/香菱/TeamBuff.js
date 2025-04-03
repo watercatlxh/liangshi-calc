@@ -6,7 +6,7 @@ export const TeamBuff_Xiang_Ling = [
   data: {
     kx: ({ element, params }) => ['火'].includes(element) ? (params.phy === true ? 0 : 15) : 0
   }
-}
+},
 {
   check: ({ params }) => params.team === true && params.Xiang_Ling === true,
   title: '香菱6命：[大龙卷旋火轮] 旋火轮持续期间,队伍中所有角色获得[dmg]%元素伤害加成',

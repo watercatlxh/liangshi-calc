@@ -13,11 +13,13 @@ export const buffs = CalcBuff
 export const details = [
 {
   title: `${TalentName.aName}一段伤害`,
+  dmgKey: 'a',
   dmg: ({ talent }, dmg) => dmg(talent.a['一段伤害'], 'a')
 },
 {
   title: `${TalentName.a2Name}总伤害`,
   params: { ChargedUse: 1, ChargedHit: 3, ChargedDmg: 3 },
+  dmgKey: 'z',
   dmg: ({ talent }, dmg) => {
     let zDmg = dmg(talent.a['重击伤害2'][0], 'a2')
     return {
@@ -33,6 +35,7 @@ export const details = [
 {
   title: `${TalentName.eName}融化`,
   params: { FireAttachment: true },
+  dmgKey: 'e',
   dmg: ({ talent }, dmg) => dmg(talent.e['技能伤害'], 'e', 'melt')
 },
 {
@@ -53,5 +56,6 @@ export const details = [
 {
   title: `${TalentName.qName}尾段融化`,
   params: { Frostflake_Seki: true, FireAttachment: true, BurstUse: 1, BurstHit: 12, BurstDmg: 12 },
+  dmgKey: 'q',
   dmg: ({ talent }, dmg) => dmg(talent.q['绽放伤害'], 'q', 'melt')
 }]

@@ -5,30 +5,32 @@ import { CalcBuff } from './CalcBuff.js'
 let CharacterName = "希格雯"
 let cfg = LSconfig.getConfig('user', 'config')
 let energy = cfg.energymodel || 0
+let BLPlusPath = cfg.bndOfLifePlus || 0
+let BLPctPath = cfg.bndOfLifePct || 1
 let TalentName = ObTalentName(CharacterName)
 export const defDmgKey = RankingKey(CharacterName)
 export const mainAttr = mainAttrData[CharacterName]
-export const defParams = { ElementSame: 1, ElementIceTeam: 1, FontaineTeammate: 1, EnergyTeammate: 70, HealDetermine: true, TruceChangeHp: true, HealTeamDetermine: true, PrimordialDetermine: "ousia" }
+export const defParams = { blPlus: `${BLPlusPath}`, blPct: `${BLPctPath}`, ElementSame: 1, ElementIceTeam: 1, FontaineTeammate: 1, EnergyTeammate: 70, HealDetermine: true, TruceChangeHp: true, HealTeamDetermine: true, PrimordialDetermine: "ousia" }
 export const buffs = CalcBuff
 export const details = [
 {
   title: `${TalentName.a2Name}伤害`,
   params: { ChargedUse: 1, ChargedHit: 1, ChargedDmg: 1 },
   dmgKey: 'z',
-  dmg: ({ talent, attr , cons }, dmg ) => dmg(talent.a['满蓄力瞄准射击'], 'a2')
+  dmg: ({ talent, attr , cons }, dmg) => dmg(talent.a['满蓄力瞄准射击'], 'a2')
 },
 {
   title: `小小关心气泡伤害`,
   params: { ChargedUse: 1, ChargedHit: 4, ChargedDmg: 4 },
   dmgKey: 'undefined',
-  dmg: ({ talent, attr , cons }, dmg ) => dmg(talent.a['小小关心气泡伤害'], 'a2')
+  dmg: ({ talent, attr , cons }, dmg) => dmg(talent.a['小小关心气泡伤害'], 'a2')
 },
 {
   title: `${TalentName.eName}伤害提升值`,
   dmgKey: 'f',
   dmg: ({ calc, attr, cons }) => {
-      let cons1 = cons >= 1 ? 100 : 80
-      let cos1 = cons >= 1 ? 3500 : 2800
+    let cons1 = cons >= 1 ? 100 : 80
+    let cos1 = cons >= 1 ? 3500 : 2800
     return {
       avg: Math.max(0, Math.min(((calc(attr.hp) - 30000) / 1000 * cons1), cos1))
     }

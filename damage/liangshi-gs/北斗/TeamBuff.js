@@ -5,7 +5,7 @@ export const TeamBuff_Bei_Dou = [
   data: {
     _reduction: 20
   }
-}
+},
 {
   check: ({ params }) => params.team === true && params.Bei_Dou === true,
   title: '北斗6命：[北斗祓幽孽] 斫雷持续期间，周围敌人的元素抗性降低[kx]%',

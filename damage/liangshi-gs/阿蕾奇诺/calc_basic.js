@@ -10,7 +10,7 @@ let BLPctPath = cfg.bndOfLifePct || 1
 let TalentName = ObTalentName(CharacterName)
 export const defDmgKey = RankingKey(CharacterName)
 export const mainAttr = mainAttrData[CharacterName]
-export const defParams = { ElementSame: 1, ElementFireTeam: 1, EnergyTeammate: 60, HealDetermine: true }
+export const defParams = { blPlus: `${BLPlusPath}`, blPct: `${BLPctPath}`, ElementSame: 1, ElementFireTeam: 1, EnergyTeammate: 60, HealDetermine: true }
 export const buffs = CalcBuff
 export const details = [
 {

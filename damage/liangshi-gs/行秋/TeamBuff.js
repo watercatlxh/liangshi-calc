@@ -6,7 +6,7 @@ export const TeamBuff_Xing_Qiu = [
     _interruption: 70,
     _reduction: 29 + 24
   }
-}
+},
 {
   check: ({ params }) => params.team === true && params.Xing_Qiu === true,
   title: '行秋2命：[天青现虹] ,受到剑雨攻击的敌人元素抗性降低[kx]%',

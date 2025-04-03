@@ -5,10 +5,12 @@ import { CalcBuff } from './CalcBuff.js'
 let CharacterName = "克洛琳德"
 let cfg = LSconfig.getConfig('user', 'config')
 let energy = cfg.energymodel || 0
+let BLPlusPath = cfg.bndOfLifePlus || 0
+let BLPctPath = cfg.bndOfLifePct || 1
 let TalentName = ObTalentName(CharacterName)
 export const defDmgKey = RankingKey(CharacterName)
 export const mainAttr = mainAttrData[CharacterName]
-export const defParams = { FontaineTeammate: 1, ElementSame: 1, ElementMineTeam: 1, EnergyTeammate: 60, HealDetermine: true, PrimordialDetermine: "ousia" }
+export const defParams = { blPlus: `${BLPlusPath}`, blPct: `${BLPctPath}`, FontaineTeammate: 1, ElementSame: 1, ElementMineTeam: 1, EnergyTeammate: 60, HealDetermine: true, PrimordialDetermine: "ousia" }
 export const buffs = CalcBuff
 export const details = [
 {

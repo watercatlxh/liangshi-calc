@@ -33,6 +33,7 @@ export const details = [
 },
 {
   title: `${TalentName.eName}伤害`,
+  dmgKey: 'e',
   dmg: ({ talent }, dmg) => dmg(talent.e['技能伤害'], 'e')
 },
 {

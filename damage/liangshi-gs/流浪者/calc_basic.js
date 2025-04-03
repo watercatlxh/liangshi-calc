@@ -50,5 +50,6 @@ export const details = [
 },
 {
   title: '扩散反应伤害',
+  dmgKey: 'r',
   dmg: ({}, { reaction }) => reaction('swirl')
 }]

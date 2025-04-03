@@ -38,6 +38,7 @@ export const details = [
 {
   title: `${TalentName.qNameT}后末途真眼${TalentName.eNameT}激化`,
   params: { GrassAttachment: true, Pactsworn_Pathclearer: true , Endseer_stance: true, NormalUse: 6, NormalHit: 7, NormalDmg: 7, NormalElement: 2 },
+  dmgKey: 'e',
   dmg: ({ talent }, dmg) => dmg(talent.e['冥祭伤害'], 'e', 'aggravate')
 },
 {

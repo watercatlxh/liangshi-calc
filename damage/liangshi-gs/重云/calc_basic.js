@@ -29,6 +29,7 @@ export const details = [
 {
   title: `${TalentName.aName}四段融化`,
   params: { FireAttachment: true, NormalUse: 4, NormalHit: 4, NormalDmg: 4, NormalElement: 4 },
+  dmgKey: 'a',
   dmg: ({ talent }, dmg) => dmg(talent.a['四段伤害'], 'a', 'melt')
 },
 {
@@ -38,6 +39,7 @@ export const details = [
 {
   title: `${TalentName.eName}融化伤害`,
   params: { FireAttachment: true },
+  dmgKey: 'e',
   dmg: ({ talent }, dmg) => dmg(talent.e['技能伤害'], 'e', 'melt')
 },
 {
@@ -55,6 +57,7 @@ export const details = [
 {
   title: `${TalentName.qName}完整融化`,
   params: { FireAttachment: true, BurstUse: 1, BurstHit: 3, BurstDmg: 3 },
+  dmgKey: 'q',
   dmg: ({ talent, cons }, dmg) => {
     let q1 = dmg(talent.q['技能伤害'], 'q', 'melt')
     let cons6 = cons >= 6 ? 4 : 3

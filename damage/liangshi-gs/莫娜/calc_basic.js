@@ -25,7 +25,6 @@ export const details = [
 {
   check: ({ cons }) => cons >= 6,
   title: `${TalentName.c6Name}强化${TalentName.a2Name}蒸发`,
-  dmgKey: 'z',
   params: { Alternate_Sprint: 3, ChargedUse: 1, ChargedHit: 1, ChargedDmg: 1, FireAttachment: true },
   dmg: ({ talent }, dmg) => dmg(talent.a['重击伤害'], 'a2', 'vaporize')
 },

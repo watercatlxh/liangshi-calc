@@ -33,6 +33,7 @@ export const details = [
 {
   title: `长按${TalentName.eName}协同`,
   params: { SkillsUse: 1, SkillsHit: 4, SkillsDmg: 4 },
+  dmgKey: 'e',
   dmg: ({ talent }, dmg) => dmg(talent.e['灼火之槛伤害'], 'e,nightsoul')
 },
 {
@@ -47,5 +48,6 @@ export const details = [
 {
   title: `${TalentName.qName}释放融化`,
   params: { IceAttachment: true },
+  dmgKey: 'q',
   dmg: ({ talent }, dmg) => dmg(talent.q['技能伤害'], 'q,nightsoul', 'melt')
 }]
