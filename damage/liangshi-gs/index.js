@@ -98,8 +98,8 @@ import { TeamBuff_Lan_Yan } from './蓝砚/TeamBuff.js'
 import { TeamBuff_Mizuki } from './梦见月瑞希/TeamBuff.js'
 import { TeamBuff_Iansan } from './伊安珊/TeamBuff.js'
 import { TeamBuff_Varesa } from './瓦雷莎/TeamBuff.js'
-//import { TeamBuff_Escoffier } from './爱可菲/TeamBuff.js'
-//import { TeamBuff_Ifa } from './伊法/TeamBuff.js'
+import { TeamBuff_Escoffier } from './爱可菲/TeamBuff.js'
+import { TeamBuff_Ifa } from './伊法/TeamBuff.js'
 
 let TeamBuff = {
   TeamBuff_Kamisato_Ayaka,
@@ -197,9 +197,9 @@ let TeamBuff = {
   TeamBuff_Lan_Yan,
   TeamBuff_Mizuki,
   TeamBuff_Iansan,
-  TeamBuff_Varesa/*,
+  TeamBuff_Varesa,
   TeamBuff_Escoffier,
-  TeamBuff_Ifa*/
+  TeamBuff_Ifa
 }
 
 export { mainAttrData, ObTalentName, RankingKey, TeamBuff }

@@ -55,7 +55,7 @@ export class calc extends plugin {
     let namedata = ''
     let gitdata = ''
     if (/更新(liangshi|梁氏|LS|Liangshi|ls)/.test(this.e.msg)) {
-      gitdata = 'https://gitee.com/liangshi233'
+      gitdata = 'https://github.com/liangshi233'
       namedata = 'liangshi'
     } else if (/更新(ikun|Ikun)/.test(this.e.msg)) {
       gitdata = 'https://gitee.com/jntmtt'

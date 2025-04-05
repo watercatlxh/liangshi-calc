@@ -15,11 +15,11 @@ MasteryGs,
 },
 {
   check: ({ params }) => params.Flying_Cloud_Flag_Formation === true,
-  title: '云堇天赋：[莫从恒蹊] 队伍存在[buff]种元素类型的角色时「飞云旗阵」提供的普通攻击伤害提高[_aPlus]点',
+  title: '云堇天赋：[莫从恒蹊] 队伍存在[buff]种元素类型的角色时「飞云旗阵」提供的普通攻击伤害提高[aPlus]点',
   sort: 9,
   data: {
     buff: ({ params }) => [params.ElementGrassTeam, params.ElementIceTeam, params.ElementWaterTeam, params.ElementFireTeam, params.ElementMineTeam, params.ElementRockTeam, params.ElementWindTeam].filter(element => element >= 1).length,
-    _aPlus: ({ params, attr, calc }) => Math.min((calc(attr.def) * (([params.ElementGrassTeam, params.ElementIceTeam, params.ElementWaterTeam, params.ElementFireTeam, params.ElementMineTeam, params.ElementRockTeam, params.ElementWindTeam].filter(element => element >= 1).length * 2.5 / 100) + ([params.ElementGrassTeam, params.ElementIceTeam, params.ElementWaterTeam, params.ElementFireTeam, params.ElementMineTeam, params.ElementRockTeam, params.ElementWindTeam].filter(element => element >= 1).length == 4 ? (1.5 / 100) : 0))), 11.5)
+    aPlus: ({ params, attr, calc }) => calc(attr.def) * ((([params.ElementGrassTeam, params.ElementIceTeam, params.ElementWaterTeam, params.ElementFireTeam, params.ElementMineTeam, params.ElementRockTeam, params.ElementWindTeam].filter(element => element >= 1).length) * 2.5) + (([params.ElementGrassTeam, params.ElementIceTeam, params.ElementWaterTeam, params.ElementFireTeam, params.ElementMineTeam, params.ElementRockTeam, params.ElementWindTeam].filter(element => element >= 1).length) >= 4 ? 1.5 : 0)) / 100
   }
 },
 {
