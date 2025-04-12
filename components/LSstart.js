@@ -39,6 +39,9 @@ const LSstart = {
             path = `${_path}/plugins/miao-plugin/resources/meta-${game}/character/${name}/${ds.file}.js`
           }
         }
+        if (game == "sr" && cfg.SrDisabled) {
+          path = `${_path}/plugins/miao-plugin/resources/meta-sr/character/${name}/${ds.file}.js`
+        }
         if (ds.test && !ds.test()) {
           continue
         }

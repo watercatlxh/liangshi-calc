@@ -9,18 +9,18 @@ let rankingTwoPath = cfg.rankingTwomodel
 let rankingThreePath = cfg.rankingThreemodel
 let sr1404ranking = cfg.sr1401ranking
 let aName = '普通攻击'
-let eName = '5LiH5q275peg5oKU'
+let eName = '****'
 let eNameT = 'E'
-let qName = '6K+b5aSp54Sa6aqo55qE546L5bqn'
+let qName = '****'
 let qNameT = 'Q'
 if ( NamePath !== 1 ) {
  if ( NamePath == 2 ) {
   aName = '踏破征徒的誓言'
-  eNameT = '5LiH5q275peg5oKU'
-  qNameT = '6K+b5aSp54Sa6aqo55qE546L5bqn'
+  eNameT = '****'
+  qNameT = '****'
  } else if ( NamePath == 3 ) {
-  eNameT = '5LiH5q275peg5oKU'
-  qNameT = '6K+b5aSp54Sa6aqo55qE546L5bqn'
+  eNameT = '****'
+  qNameT = '****'
  } else if ( NamePath == 4 ) {
   eName = '战技'
   qName = '终结技'
@@ -40,16 +40,6 @@ if ( NamePath !== 1 ) {
   qNameT = 'Q'
  }
 }
-if (NamePath < 4) {
-  eName = atob(eName)
-  qName = atob(qName)
-  if (NamePath != 1) {
-    eNameT = atob(eNameT)
-    qNameT = atob(qNameT)
-  }
-}
-let dw = atob("55m7546L")//似乎能绕过入机检查
-let ds = atob("55m756We")
 const miss = ['z','f','c','h','y','dps','dph','hph','hps']
 let ranking = 'undefined'
 if (!cfg.sr1404ranking) {
@@ -97,23 +87,23 @@ export const details = [
 },
 /*
 {
-  title: `${dw}${eNameT}主目标伤害`,
+  title: `****${eNameT}主目标伤害`,
   params: { e: 1 },
   dmg: ({ talent, attr, calc }, { basic }) => basic(calc(attr.hp) * talent.e2['技能伤害'], 'e')
 },
 {
-  title: `${dw}${eNameT}相邻目标伤害`,
+  title: `****${eNameT}相邻目标伤害`,
   params: { e: 1 },
   dmg: ({ talent, attr, calc }, { basic }) => basic(calc(attr.hp) * talent.e2['相邻目标伤害'], 'e')
 },
 */
 {
-  title: `${ds}${eNameT}主目标伤害`,
+  title: `****${eNameT}主目标伤害`,
   params: { e: 2 },
   dmg: ({ talent, attr, calc, cons }, { basic }) => basic(calc(attr.hp) * (talent.e2['技能伤害'] + (cons >= 1 ? 0.3 : 0)), 'e')
 },
 {
-  title: `${ds}${eNameT}相邻目标伤害`,
+  title: `****${eNameT}相邻目标伤害`,
   params: { e: 2 },
   dmgKey: 'e',
   dmg: ({ talent, attr, calc, cons }, { basic }) => basic(calc(attr.hp) * (cons >= 1 ? talent.e3['技能伤害'] : talent.e3['相邻目标伤害']) / 100, 'e')
@@ -130,20 +120,20 @@ export const defParams = { technique: `${Technique}` }
 
 export const buffs = [characterBuffSr,enemyBuffSr,
 {
-  title: '万敌天赋：[以*还*] 【*仇】状态下生命上限提高[hpPlus]，防御力提升[defPlus]',
+  title: '万敌天赋：[****] 【****】状态下生命上限提高[hpPlus]，防御力提升[defPlus]',
   data: {
     hpPlus: ({ calc, attr }) => calc(attr.hp) * 50 / 100
   }
 },
 {
-  title: '万敌天赋：[以*还*] 【*仇】状态下防御力提升[defPlus]',
+  title: '万敌天赋：[****] 【****】状态下防御力提升[defPlus]',
   sort: 10,
   data: {
     defPlus: ({ calc, attr }) => 0 - calc(attr.def)
   }
 },
 {
-  title: '万敌行迹：[*祥罩衫] 战斗开始时，自身暴击率提高[cpct]%，受到来自敌方目标伤害造成的充能比例提高[_energyevery]%，受到治疗时的回复量提高[healInc]%',
+  title: '万敌行迹：[****] 战斗开始时，自身暴击率提高[cpct]%，受到来自敌方目标伤害造成的充能比例提高[_energyevery]%，受到治疗时的回复量提高[healInc]%',
   sort: 9,
   tree: 3,
   data: {
@@ -157,17 +147,17 @@ export const buffs = [characterBuffSr,enemyBuffSr,
   cons: 1
 },
 {
-  title: '万敌2魂：[纷争见证尸骸的喉鸣] 【*仇】状态期间，造成的伤害无视敌方目标[ignore]%的防御力',
+  title: '万敌2魂：[纷争见证尸骸的喉鸣] 【****】状态期间，造成的伤害无视敌方目标[ignore]%的防御力',
   cons: 2,
   data: {
    ignore: 15
  }
 },
 {
-  title: '万敌4魂：[号角惊觉缄默的狂狮] 【*仇】状态期间暴击伤害提高[cdmg]%',
+  title: '万敌4魂：[号角惊觉缄默的狂狮] 【****】状态期间暴击伤害提高[cdmg]%',
   cons: 4,
   data: {
    cdmg: 30
  }
 },
- { title: `4.5最后修改：[3.5重置] 显示模式:${NamePath} 排行设置:${rankingOnePath},${rankingTwoPath},${rankingThreePath} 专属排行设置:${sr1404ranking} 更新日志:${renew} 其他信息:${information}` }]
+ { title: `4.12最后修改：[3.5重置] 显示模式:${NamePath} 排行设置:${rankingOnePath},${rankingTwoPath},${rankingThreePath} 专属排行设置:${sr1404ranking} 更新日志:${renew} 其他信息:${information}` }]

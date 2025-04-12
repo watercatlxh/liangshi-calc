@@ -185,7 +185,7 @@ const buffs = {
       }
     },
     4: {
-      title: '击败敌人时,有100%概率清除元素战技的冷却时间',
+      title: '击败敌人时,有100.0%概率清除元素战技的冷却时间',
       data: {
         _eCd: 100
       }
@@ -217,7 +217,7 @@ const buffs = {
       }
     },
     4: {
-      check: ({ params }) => params.FireAttachment != true && params.IceAttachment != true && params.WindAttachment != true,
+      check: ({ params }) => [params.FireAttachment, params.IceAttachment, params.WindAttachment].every(attachment => !attachment),
       title: '对处于雷元素影响下的敌人造成的伤害提升[dmg]%', //目标不处于火冰风元素影响下，水岩草元素影响下雷可共存，激元素不触发此效果
       data: {
         dmg: 35
@@ -283,7 +283,7 @@ const buffs = {
       }
     },
     4: {
-      check: ({ params }) => params.IceAttachment != true && params.WaterAttachment != true && params.MineAttachment != true && params.WindAttachment != true,
+      check: ({ params }) => [params.WaterAttachment, params.IceAttachment, params.MineAttachment, params.WindAttachment].every(attachment => !attachment),
       title: '对处于火元素影响下的敌人造成的伤害提升[dmg]%' , //目标不处于冰水雷风元素影响下，岩草元素影响下火可共存，燃元素可触发此效果
       data: {
         dmg: 35
@@ -342,7 +342,7 @@ const buffs = {
   逆飞的流星: {
     2: attr('shield', 35),
     4: {
-      check: ({ params, element }) => params.ShieldDetermine == true || params.ShieldTime > 0 || element === '岩',
+      check: ({ params, element }) => (params.ShieldDetermine == true) || (params.ShieldTime > 0) || (element === '岩'),
       title: '处于护盾庇护下时，额外获得[aDmg]%普通攻击和重击伤害加成',
       data: {
         aDmg: 40,
@@ -354,7 +354,7 @@ const buffs = {
   冰风迷途的勇士: {
     2: attr('dmg', 15, '冰'),
     4: {
-      check: ({ params }) => params.FireAttachment != true && params.MineAttachment != true && params.WindAttachment != true,
+      check: ({ params }) => [params.FireAttachment, params.MineAttachment, params.WindAttachment].every(attachment => !attachment),
       title: '攻击处于冰元素影响下的敌人时，暴击率提高，若敌人处于冻结状态下，则暴击率额外提高，合计提高[cpct]%暴击率',//目标不处于火雷风元素影响下，水岩草元素影响下冰与冻可共存，冻元素可触发此效果
       data: {
         cpct: ({ params }) => (params.FreezeDetermine === true ? 2 : 1) * 20
@@ -597,8 +597,8 @@ const buffs = {
     4: {
       title: '生命之契的数值提升或降低[buff]次，造成的伤害提升[dmg]%',
       data: {
-        buff: ({ params }) => params.ChangeBondOfLife || 0,
-        dmg: ({ params }) => Math.min((params.ChangeBondOfLife || 0), 3) * 18
+        buff: ({ params }) => (params.DecreasedBondOfLife || 0) + (params.BondOfLifeGet || 0),
+        dmg: ({ params }) => Math.min(((params.DecreasedBondOfLife || 0) + (params.BondOfLifeGet || 0)), 3) * 18
       }
     }
   },
@@ -615,7 +615,7 @@ const buffs = {
 
   黑曜秘典: {
     2: {
-      check: ({ params }) => params.Nightsoul === true && (params.TruceTime || 0) <= 0,
+      check: ({ params }) => params.Nightsoul === true && !params.TruceTime,
       title: '处于夜魂加持状态，且在场上时，造成的伤害提高[dmg]%。',
       data: {
         dmg: 20

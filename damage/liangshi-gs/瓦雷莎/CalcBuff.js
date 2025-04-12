@@ -6,7 +6,7 @@ enemyBuffGs,
 ImaginariumBuff,
 MasteryGs,
 {
-  title: '瓦雷莎天赋：[连势，三重腾跃！] 施放元素战技后，下落攻击坠地冲击造成的伤害提升[a3Dmg]%',
+  title: '瓦雷莎天赋：[连势，三重腾跃！] 施放元素战技后，下落攻击坠地冲击造成的伤害提升[a3Plus]%',
   data: {
     a3Plus: ({ params, attr, calc }) => (params.Fiery_Passion == true ? 180 : 50) * calc(attr.atk) / 100
   }
