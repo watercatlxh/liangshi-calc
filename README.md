@@ -21,6 +21,12 @@ git clone --depth=1 https://gitee.com/liangshi233/liangshi-calc.git ./plugins/li
 ~~~~~~~~~~
 git clone --depth=1 https://github.com/liangshi233/liangshi-calc.git ./plugins/liangshi-calc/
 ~~~~~~~~~~
+   > 如果你的网络环境较差，无法连接到 Github，推荐使用文件代理加速下载服务
+   >
+   > ```
+   > git clone --depth=1 https://git.090708.xyz/https://github.com/liangshi233/liangshi-calc.git ./plugins/liangshi-calc/
+   > ```
+
 重启Bot后即可启用插件
 
 ### 设置
