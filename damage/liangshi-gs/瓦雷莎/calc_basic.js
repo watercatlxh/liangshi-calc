@@ -52,7 +52,7 @@ export const details = [
   title: `${TalentName.qNameT}强化${TalentName.a3Name}伤害`,
   dmgKey: 'c',
   params: { PlungingUse: 1, PlungingHit: 1, PlungingDmg: 1, EnergyDetermine: 18, NightsoulUse: 40, EnergyUse: 1 },
-  dmg: ({ talent, cons, attr, calc }, dmg ) => basic(calc(attr.atk) * (talent.q['「大火山崩落」伤害'] + 180), 'a3,nightsoul')
+  dmg: ({ talent, cons, attr, calc }, { basic }) => basic(calc(attr.atk) * (talent.q['「大火山崩落」伤害'] + (cons >= 1 ? 180 : 0)) / 100, 'a3,nightsoul')
 },
 {
   check: ({ cons }) => cons >= 4,

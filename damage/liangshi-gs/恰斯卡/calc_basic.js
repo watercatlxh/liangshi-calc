@@ -16,7 +16,7 @@ export const details = [
 {
   title: `${TalentName.eName}点按伤害`,
   dmgKey: 'a',
-  params: { Shadowhunt_Shell: false, ElementDifferent: 0 },
+  params: { Shadowhunt_Shell: false, ElementDifferent: 0, ChargedAfter: false, ChangeNightsou: 2, NightsoulUse: 8 },
   dmg: ({ talent }, dmg) => {
     let deDmg = dmg(talent.e['多重瞄准点按伤害'], 'a,nightsoul')
     szfhgzyd = dmg(talent.e['焕光追影弹伤害'], 'a2,nightsoul', 'scene,vaporize')
@@ -24,22 +24,22 @@ export const details = [
   }
 },
 {
-  title: '追影弹伤害',
-  params: { Shadowhunt_Shell: false, NormalUse: 1, ChargedHit: 6, ChargedDmg: 6 },
+  title: '追影弹伤害', // 锁定重击触发不了弹弓与阿莫斯，ChargedAfter直接给false屏蔽相应类型buff
+  params: { Shadowhunt_Shell: false, NormalUse: 1, ChargedHit: 6, ChargedDmg: 6, ChargedAfter: false, ChangeNightsou: 2, NightsoulUse: 8 },
   dmg: ({ talent }, dmg) => {
     zyd = dmg(talent.e['追影弹伤害'], 'a2,nightsoul')
     return zyd
   }
 },
 {
-  title: '焕光追影弹伤害',
+  title: '焕光追影弹伤害', //每秒消耗约8夜魂值
   dmgKey: 'z',
-  params: { Shadowhunt_Shell: true, ElementDifferent: 3, NormalUse: 1, ChargedHit: 6, ChargedDmg: 6 },
+  params: { Shadowhunt_Shell: true, ElementDifferent: 3, NormalUse: 1, ChargedHit: 6, ChargedDmg: 6, ChargedAfter: false, ChangeNightsou: 4, NightsoulUse: 24 },
   dmg: ({ talent }, dmg) => dmg(talent.e['焕光追影弹伤害'], 'a2,nightsoul', 'scene')
 },
 {
   title: `模拟长按${TalentName.eName}-2火1水队友`,
-  params: { simulate: true, Shadowhunt_Shell: true, ElementWindTeam: 1, ElementFireTeam: 2, ElementWaterTeam: 1, ElementDifferent: 3, NormalUse: 1, ChargedHit: 6, ChargedDmg: 6 },
+  params: { simulate: true, Shadowhunt_Shell: true, ElementWindTeam: 1, ElementFireTeam: 2, ElementWaterTeam: 1, ElementDifferent: 3, NormalUse: 1, ChargedHit: 6, ChargedDmg: 6, ChargedAfter: false, ChangeNightsou: 4, NightsoulUse: 24 },
   dmg: ({ talent, cons, attr, calc }, { basic, reaction }) => {
     let hgzyd = basic(talent.e['焕光追影弹伤害'] * calc(attr.atk) / 100, 'a2,nightsoul', 'scene')
     let hzfhgzyd = basic(talent.e['焕光追影弹伤害'] * calc(attr.atk) / 100, 'a2,nightsoul', 'scene,vaporize')

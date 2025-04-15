@@ -3,7 +3,7 @@ export const TeamBuff_Iansan = [
   check: ({ params }) => params.team === true && params.Iansan === true && !params.TruceTime,
   title: '伊安珊技能：[力的三原理] 取出动能标示跟随角色行动，使队伍中自己的当前场上角色的攻击力提升[atkPlus]',
   data: {
-    atkPlus: ({ cons }) => cons >= 5 ? 690 : 810
+    atkPlus: ({ cons }) => cons >= 5 ? 810 : 690
   }
 },
 {
