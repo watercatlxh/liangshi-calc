@@ -35,8 +35,9 @@ const buffs = {
     2: attr('hpPlus', 1000, '', '点'),
     4: {
       title: '开启各类宝箱后,恢复[_restore]生命值',
+      sort: 9,
       data: {
-        _restore: ({ attr }) => (attr.hp.base + attr.hp.plus + attr.hp.pct * attr.hp.base) * 30 / 100
+        _restore: ({ calc, attr }) => (calc(attr.hp) * 30 / 100) * calc(attr.heal) / 100
       }
     }
   },
@@ -45,8 +46,9 @@ const buffs = {
     2: attr('defPlus', 100, '', '点'),
     4: {
       title: '拾取摩拉时,恢复[_restore]生命值',
+      sort: 9,
       data: {
-        _restore: 300
+        _restore: ({ calc, attr }) => 300 * calc(attr.heal) / 100
       }
     }
   },
@@ -61,7 +63,7 @@ const buffs = {
     4: {
       title: '施放元素爆发时,恢复[_restore]生命值',
       data: {
-        _restore: ({ attr }) => (attr.hp.base + attr.hp.plus + attr.hp.pct * attr.hp.base) * 20 / 100
+        _restore: ({ calc, attr }) => (calc(attr.hp) * 20 / 100) * calc(attr.heal) / 100
       }
     }
   },
@@ -118,8 +120,8 @@ const buffs = {
     4: {
       title: '根据队伍中不同[buff]种元素类型的自己的角色,提升[_res]%相应的元素抗性',
       data: {
-        buff: ({ params }) => params.ElementDifferent || 3,
-        _res: 30
+        buff: ({ params }) => params.ElementDifferent || 0,
+        _res: ({ params }) => (params.ElementDifferent || 0) > 0 ? 30 : 0
       }
     }
   },
@@ -140,7 +142,7 @@ const buffs = {
     4: {
       title: '触发元素反应后，队伍中所有角色的元素精通提高[mastery]点',
       data: {
-        mastery: 120 ,
+        mastery: 120,
         masteryInc: 120
       }
     }
@@ -155,10 +157,11 @@ const buffs = {
       }
     },
     4: {
-      title: '施放元素战技后,普通攻击和重击造成的伤害提升[aDmg]%',
+      title: '施放元素战技[buff]次,普通攻击和重击造成的伤害提升[aDmg]%',
       data: {
-        aDmg: 25,
-        a2Dmg: 25
+        buff: ({ params }) => params.SkillsUse || 1,
+        aDmg: ({ params }) => (params.SkillsUse || 1) > 0 ? 25 : 0,
+        a2Dmg: ({ params }) => (params.SkillsUse || 1) > 0 ? 25 : 0
       }
     }
   },
@@ -217,7 +220,7 @@ const buffs = {
       }
     },
     4: {
-      check: ({ params }) => [params.FireAttachment, params.IceAttachment, params.WindAttachment].every(attachment => !attachment),
+      check: ({ params }) => params.FireAttachment != true && params.IceAttachment != true && params.WindAttachment != true,
       title: '对处于雷元素影响下的敌人造成的伤害提升[dmg]%', //目标不处于火冰风元素影响下，水岩草元素影响下雷可共存，激元素不触发此效果
       data: {
         dmg: 35
@@ -228,7 +231,7 @@ const buffs = {
   悠古的磐岩: {
     2: attr('dmg', 15, '岩'),
     4: {
-      check: ({ element }) => !['岩', '风', '草'].includes(element),
+      check: ({ params, element }) => !['岩', '风', '草'].includes(element) && (((params.CrystallizeNumber) > 0) || ((params.ElementRockTeam || 0) > 0)),
       title: '获得结晶反应形成的晶片时，队伍中所有角色获得[dmg]%对应元素伤害加成',
       data: {
         dmg: 35
@@ -244,10 +247,11 @@ const buffs = {
       }
     },
     4: {
-      title: '施放元素爆发后，队伍中所有角色攻击力提升[atkPct]%',
+      title: '施放元素爆发[buff]次，队伍中所有角色攻击力提升[atkPct]%',
 //      check: ({ currentTalent }) => !currentTalent || currentTalent === 'q',
       data: {
-        atkPct: 20
+        buff: ({ params }) => params.BurstUse || 0,
+        atkPct: ({ params }) => (params.BurstUse || 0) > 0 ? 20 : 0
       }
     }
   },
@@ -283,7 +287,7 @@ const buffs = {
       }
     },
     4: {
-      check: ({ params }) => [params.WaterAttachment, params.IceAttachment, params.MineAttachment, params.WindAttachment].every(attachment => !attachment),
+      check: ({ params }) => params.IceAttachment != true && params.WaterAttachment != true && params.MineAttachment != true && params.WindAttachment != true,
       title: '对处于火元素影响下的敌人造成的伤害提升[dmg]%' , //目标不处于冰水雷风元素影响下，岩草元素影响下火可共存，燃元素可触发此效果
       data: {
         dmg: 35
@@ -311,7 +315,7 @@ const buffs = {
     2: attr('dmg', 15, '风'),
     4: {
       title: '扩散反应造成的伤害提升[swirl]%，根据扩散的元素类型，降低受到影响的敌人[fykx]%的对应元素抗性',
-      data: {
+      data: { //恰斯卡,蓝砚的转化伤害时转换成元素增伤
         swirl: 60,
         fykx: 40
       }
@@ -321,9 +325,10 @@ const buffs = {
   被怜爱的少女: {
     2: attr('heal', 15),
     4: {
-      title: '施放元素战技或元素爆发后，队伍中所有角色受治疗效果加成提高[healInc]%',
+      title: '施放元素战技或元素爆发[buff]次，队伍中所有角色受治疗效果加成提高[healInc]%',
       data: {
-        healInc: 20
+        buff: ({ params }) => (params.SkillsUse || 1) + (params.BurstUse || 0),
+        healInc: ({ params }) => ((params.SkillsUse || 1) + (params.BurstUse || 0)) > 0 ? 20 : 0
       }
     }
   },
@@ -354,8 +359,8 @@ const buffs = {
   冰风迷途的勇士: {
     2: attr('dmg', 15, '冰'),
     4: {
-      check: ({ params }) => [params.FireAttachment, params.MineAttachment, params.WindAttachment].every(attachment => !attachment),
-      title: '攻击处于冰元素影响下的敌人时，暴击率提高，若敌人处于冻结状态下，则暴击率额外提高，合计提高[cpct]%暴击率',//目标不处于火雷风元素影响下，水岩草元素影响下冰与冻可共存，冻元素可触发此效果
+      check: ({ params }) => params.FireAttachment != true && params.MineAttachment != true && params.WindAttachment != true,
+      title: '攻击处于冰元素影响下或处于冻结状态下的敌人时，暴击率提高[cpct]%',//目标不处于火雷风元素影响下，水岩草元素影响下冰与冻可共存，冻元素可触发此效果
       data: {
         cpct: ({ params }) => (params.FreezeDetermine === true ? 2 : 1) * 20
       }
@@ -365,10 +370,11 @@ const buffs = {
   沉沦之心: {
     2: attr('dmg', 15, '水'),
     4: {
-      title: '施放元素战技后，普通攻击与重击造成的伤害提高[aDmg]%',
+      title: '施放元素战技[buff]次，普通攻击与重击造成的伤害提高[aDmg]%',
       data: {
-        aDmg: 30,
-        a2Dmg: 30
+        buff: ({ params }) => params.SkillsUse || 1,
+        aDmg: ({ params }) => (params.SkillsUse || 1) > 0 ? 30 : 0,
+        a2Dmg: ({ params }) => (params.SkillsUse || 1) > 0 ? 30 : 0
       }
     }
   },
@@ -376,10 +382,11 @@ const buffs = {
   千岩牢固: {
     2: attr('hpPct', 20),
     4: {
-      title: '元素战技命中敌人后，使队伍中附近的所有角色攻击力提升[atkPct]%，护盾强效提升[shield]%',
+      title: '元素战技命中敌人[buff]次，使队伍中附近的所有角色攻击力提升[atkPct]%，护盾强效提升[shield]%',
       data: {
-        atkPct: 20 ,
-        shield: 30
+        buff: ({ params }) => params.SkillsHit || 1,
+        atkPct: ({ params }) => (params.SkillsHit || 1) > 0 ? 20 : 0,
+        shield: ({ params }) => (params.SkillsHit || 1) > 0 ? 30 : 0
       }
     }
   },
@@ -411,7 +418,7 @@ const buffs = {
     2: attr('atkPct', 18),
     4: {
       title: '施放元素战技后,恢复[_energyevery]点元素能量,使接下来的普通攻击、重击、下落攻击造成的伤害提高[aDmg]%',
-      data: {  //Q后普攻重击默认不触发
+      data: {
         _energyevery: ({ params }) => (params.EnergyDetermine || 100) >= 15 ? -15 : 0,
         aDmg: ({ params }) => (params.EnergyDetermine || 100) >= 15 ? 50 : 0,
         a2Dmg: ({ params }) => (params.EnergyDetermine || 100) >= 15 ? 50 : 0,
@@ -426,7 +433,7 @@ const buffs = {
       title: '[buff]层问答,提供[defPct]%防御与[dmg]%岩元素伤害加成',
       data: { // 6秒损失1层，暂时不计算损失，默认提供1层效果
         buff: ({ params }) => Math.min(((params.RockDmg || 0) + Math.floor((params.TruceTime || 0) / 3) + 1), 4),
-        defPct: ({ params }) => Math.min(((params.RockDmg || 0) + Math.floor((params.TruceTime || 0) / 3) + 1), 4) * 6 ,
+        defPct: ({ params }) => Math.min(((params.RockDmg || 0) + Math.floor((params.TruceTime || 0) / 3) + 1), 4) * 6,
         dmg: ({ params, element }) => element === '岩' ? Math.min(((params.RockDmg || 0) + Math.floor((params.TruceTime || 0) / 3) + 1), 4) * 6 : 0
       }
     }
@@ -454,7 +461,7 @@ const buffs = {
       title: '施放元素爆发后攻击力提升,生命值降低时攻击力进一步提升.[buff]层「潜光」提升合计[atkPct]%攻击力',
       data: { // 自身不处于护盾下默认额外提供1层，敌人处于燃烧状态下且自身不处于护盾下提供满层
         buff: ({ params }) => Math.min((params.BurningDetermine == true ? (!params.ShieldTime ? 4 : (params.ChangeHp || 0)) : ((params.SubjectedDmg || (!params.ShieldTime ? 1 : 0)) + (ChangeHp || 0))), 4),
-        atkPct: ({ params }) => Math.min((params.BurningDetermine == true ? (!params.ShieldTime ? 4 : (params.ChangeHp || 0)) : ((params.SubjectedDmg || (!params.ShieldTime ? 1 : 0)) + (ChangeHp || 0))), 4) * 10 + 8
+        atkPct: ({ params }) => params.BurstUse > 0 ? (Math.min((params.BurningDetermine == true ? (!params.ShieldTime ? 4 : (params.ChangeHp || 0)) : ((params.SubjectedDmg || (!params.ShieldTime ? 1 : 0)) + (ChangeHp || 0))), 4) * 10 + 8) : 0
       }
     }
   },
@@ -462,10 +469,11 @@ const buffs = {
   深林的记忆: {
     2: attr('dmg', 15, '草'),
     4: {
-      title: '元素战技或元素爆发命中敌人后，使命中目标的元素抗性降低[kx]%',
       check: ({ element }) => element === '草',
+      title: '元素战技或元素爆发命中敌人[buff]次，使命中目标的元素抗性降低[kx]%',
       data: {
-        kx: 30
+        buff: ({ params }) => (params.BurstHit || 0) + (params.SkillsHit || 1),
+        kx: ({ params }) => ((params.BurstHit || 0) + (params.SkillsHit || 1)) > 0 ? 30 : 0
       }
     }
   },
@@ -477,9 +485,9 @@ const buffs = {
     4: {
       title: '触发元素反应后，队伍存在不同元素类型角色[buff]个，元素精通提升[mastery]点，攻击力提升[atkPct]%',
       data: {
-        buff: ({ params }) => Math.min((params.ElementDifferent || 3), 3),
-        mastery: ({ params }) => Math.min((params.ElementDifferent || 3) , 3) * 50,
-        atkPct: ({ params }) => (params.ElementSame || 1) * 14
+        buff: ({ params }) => Math.min((params.ElementDifferent || 0), 3),
+        mastery: ({ params }) => Math.min((params.ElementDifferent || 0) , 3) * 50,
+        atkPct: ({ params }) => (params.ElementSame || 0) * 14
       }
     }
   },
@@ -501,12 +509,13 @@ const buffs = {
   沙上楼阁史话: {
     2: attr('dmg', 15, '风'),
     4: {
-      title: '重击命中敌人后，普通攻击速度提升[_aSpeed]%，普通攻击、重击与下落攻击造成的伤害提升[aDmg]%',
+      title: '重击命中[buff]次，普通攻击速度提升[_aSpeed]%，普通攻击、重击与下落攻击造成的伤害提升[aDmg]%',
       data: {
-        _aSpeed: 10,
-        aDmg: 40,
-        a2Dmg: 40,
-        a3Dmg: 40
+        buff: ({ params }) => params.ChargedHit || 0,
+        _aSpeed: ({ params }) => (params.ChargedHit || 0) > 0 ? 10 : 0,
+        aDmg: ({ params }) => (params.ChargedHit || 0) > 0 ? 40 : 0,
+        a2Dmg: ({ params }) => (params.ChargedHit || 0) > 0 ? 40 : 0,
+        a3Dmg: ({ params }) => (params.ChargedHit || 0) > 0 ? 40 : 0
       }
     }
   },
@@ -516,9 +525,9 @@ const buffs = {
     4: {
       title: '普通攻击、重击、下落攻击、元素战技与元素爆发合计命中敌人[buff]类,攻击力提高[atkPct]%,元素伤害加成提升[dmg]%',
       data: {
-        buff: ({ params }) => Math.min((Math.min((params.NormalHit || 0), 1) + Math.min((params.ChargedHit || 0), 1) + Math.min((params.PlungingHit || 0), 1) + Math.min((params.SkillsHit || 1), 1) + Math.min((params.BurstHit || 0), 1)), 4),
-        atkPct: ({ params }) => Math.min((9 * Math.min((Math.min((params.NormalHit || 0), 1) + Math.min((params.ChargedHit || 0), 1) + Math.min((params.PlungingHit || 0), 1) + Math.min((params.SkillsHit || 1), 1) + Math.min((params.BurstHit || 0), 1)), 4) - 2), 0),
-        dmg: ({ params, element }) => element === '水' ? ((Math.min((Math.min((params.NormalHit || 0), 1) + Math.min((params.ChargedHit || 0), 1) + Math.min((params.PlungingHit || 0), 1) + Math.min((params.SkillsHit || 1), 1) + Math.min((params.BurstHit || 0), 1)), 4) == 1 ? 1 : 0) + (Math.min((6 * Math.min((Math.min((params.NormalHit || 0), 1) + Math.min((params.ChargedHit || 0), 1) + Math.min((params.PlungingHit || 0), 1) + Math.min((params.SkillsHit || 1), 1) + Math.min((params.BurstHit || 0), 1)), 4) - 3), 0))) : 0
+        buff: ({ params }) => [(params.NormalHit || 1), params.ChargedHit, params.PlungingHit, (params.SkillsHit || 1), params.BurstHit].filter(Hit => Hit > 0).length,
+        atkPct: ({ params }) => Math.min((Math.max((9 * [(params.NormalHit || 1), params.ChargedHit, params.PlungingHit, (params.SkillsHit || 1), params.BurstHit].filter(Hit => Hit > 0).length - 2), 0)), 25),
+        dmg: ({ params, element }) => element === '水' ? Math.min(((1 / 2) * Math.pow([(params.NormalHit || 1), params.ChargedHit, params.PlungingHit, (params.SkillsHit || 1), params.BurstHit].filter(Hit => Hit > 0).length, 2) + 3.5 * [(params.NormalHit || 1), params.ChargedHit, params.PlungingHit, (params.SkillsHit || 1), params.BurstHit].filter(Hit => Hit > 0).length), 15) : 0
       }
     }
   },
@@ -526,8 +535,9 @@ const buffs = {
   花海甘露之光: {
     2: attr('hpPct', 20),
     4: {
-      title: '装备者受到伤害后,元素战技与元素爆发造成的伤害提升[eDmg]%',
+      title: '装备者受到[buff]次伤害,元素战技与元素爆发造成的伤害提升[eDmg]%',
       data: { // 默认一层，不处于护盾下且敌人燃烧给满层,与暗巷闪光一同携带优先触发花海甘露之光
+        buff: ({ params }) => params.SubjectedDmg || (!params.ShieldTime ? (BurningDetermine == true ? 5 : 1) : 0),
         eDmg: ({ params }) => 10 + 10 * 0.8 * (params.SubjectedDmg || (!params.ShieldTime ? (BurningDetermine == true ? 5 : 1) : 0)),
         qDmg: ({ params }) => 10 + 10 * 0.8 * (params.SubjectedDmg || (!params.ShieldTime ? (BurningDetermine == true ? 5 : 1) : 0))
       }
@@ -543,7 +553,7 @@ const buffs = {
       }
     },
     4: {
-      title: '当前生命值提升或降低时，暴击率提升[cpct]%',
+      title: '当前生命值提升或降低[buff]次，暴击率提升[cpct]%',
       data: { // 自身不处于护盾下默认额外提供1层，敌人处于燃烧状态下且自身不处于护盾下提供满层
         buff: ({ params }) => Math.min((params.BurningDetermine == true ? (!params.ShieldTime ? 3 : (params.ChangeHp || 0)) : ((params.ChangeHp || 0) + (!params.ShieldTime ? 1 : 0))), 3),
         cpct: ({ params }) => Math.min((params.BurningDetermine == true ? (!params.ShieldTime ? 3 : (params.ChangeHp || 0)) : ((params.ChangeHp || 0) + (!params.ShieldTime ? 1 : 0))), 3) * 12
@@ -597,8 +607,8 @@ const buffs = {
     4: {
       title: '生命之契的数值提升或降低[buff]次，造成的伤害提升[dmg]%',
       data: {
-        buff: ({ params }) => (params.DecreasedBondOfLife || 0) + (params.BondOfLifeGet || 0),
-        dmg: ({ params }) => Math.min(((params.DecreasedBondOfLife || 0) + (params.BondOfLifeGet || 0)), 3) * 18
+        buff: ({ params }) => (params.BondOfLifeGet || 0) + (params.DecreasedBondOfLife || 0),
+        dmg: ({ params }) => Math.min(((params.BondOfLifeGet || 0) + (params.DecreasedBondOfLife || 0)), 3) * 18
       }
     }
   },
@@ -616,14 +626,14 @@ const buffs = {
   黑曜秘典: {
     2: {
       check: ({ params }) => params.Nightsoul === true && !params.TruceTime,
-      title: '处于夜魂加持状态，且在场上时，造成的伤害提高[dmg]%。',
+      title: '处于夜魂加持状态，在场上造成的伤害提高[dmg]%。',
       data: {
         dmg: 20
       }
     },
     4: {
-      check: ({ params }) => params.NightsoulUse >= 10,
-      title: '装备者在场上消耗10点夜魂值后，暴击率提高[cpct]%',
+      check: ({ params }) => params.NightsoulUse >= 1,
+      title: '装备者在场上消耗1.0点夜魂值后，暴击率提高[cpct]%',
       data: {
         cpct: 40
       }
@@ -639,14 +649,12 @@ const buffs = {
       }
     },
     4: {
-      title: '触发元素反应时，所有元素伤害加成与物理伤害加成提升[dmg]%',
+      title: '触发元素反应时，对应元素伤害加成加成提升[dmg]%',
       data: {
         dmg: ({ params }) => (params.Nightsoul === true ? 28 : 0) + 12
       }
     }
   },
-
-//未实装
 
   长夜之誓: {
     2: {
@@ -676,6 +684,8 @@ const buffs = {
     }
   },
 
+//未实装: null
+
 //已废弃或已移除
 
   祭风之人: {},
@@ -692,7 +702,7 @@ const buffs = {
     }
   },
 
-  今日宗室之仪: {
+  今日宗室之仪: { // 老宗室，非独立圣遗物
     2: attr('cdmg', 30),
     4: {
       title: '攻击生命值百分比高于自身的敌人时，暴击率提高[cpct]%；攻击生命百分比低于自身的敌人时，暴击伤害提升[cdmg]%。',

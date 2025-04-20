@@ -14,7 +14,7 @@ export const TeamArtifact = {
 //4星
 
   流放者: {
-      title: '释放元素爆发后,队伍中所有角色恢复[_energyevery]点元素能量',
+      title: '队友圣遗物：[流放者] 释放元素爆发后,队伍中所有角色恢复[_energyevery]点元素能量',
       data: {
         _energyevery: 6
       }
@@ -22,7 +22,7 @@ export const TeamArtifact = {
 
   学士: {
       check: ({ weaponTypeName }) => ['弓', '法器'].includes(weaponTypeName),
-      title: '获得元素微粒或元素晶球时,队伍中角色额外恢复[_energyevery]点元素能量',
+      title: '队友圣遗物：[学士] 获得元素微粒或元素晶球时,队伍中角色额外恢复[_energyevery]点元素能量',
       data: {
         _energyevery: 3
       }
@@ -30,7 +30,7 @@ export const TeamArtifact = {
 
   教官: {
       check: ({ artis }) => artis['教官'] !== 4,
-      title: '触发元素反应后，队伍中所有角色的元素精通提高[mastery]点',
+      title: '队友圣遗物：[教官] 触发元素反应后，队伍中所有角色的元素精通提高[mastery]点 {此效果不叠加}',
       data: {
         mastery: 120
       }
@@ -54,7 +54,7 @@ export const TeamArtifact = {
 
   悠古的磐岩: {
       check: ({ element, artis, params }) => !['岩', '风', '草'].includes(element) && artis['悠古的磐岩'] !== 4 && params.ElementRockTeam >= 1,
-      title: '获得结晶反应形成的晶片时，队伍中所有角色获得[dmg]%对应元素伤害加成',
+      title: '队友圣遗物：[悠古的磐岩] 获得结晶反应形成的晶片时，队伍中所有角色获得[dmg]%对应元素伤害加成 {此效果不叠加}',
       data: {
         dmg: 35
       }
@@ -62,7 +62,7 @@ export const TeamArtifact = {
 
   昔日宗室之仪: {
       check: ({ artis }) => artis['昔日宗室之仪'] !== 4,
-      title: '施放元素爆发后，队伍中所有角色攻击力提升[atkPct]%',
+      title: '队友圣遗物：[昔日宗室之仪] 施放元素爆发后，队伍中所有角色攻击力提升[atkPct]% {此效果不叠加}',
       data: {
         atkPct: 20
       }
@@ -70,7 +70,7 @@ export const TeamArtifact = {
 
   翠绿之影: {
       check: ({ element, artis, params }) => !['岩', '风', '草'].includes(element) && artis['翠绿之影'] !== 4 && params.ElementWindTeam >= 1,
-      title: '根据扩散的元素类型，降低受到影响的敌人[kx]%的元素抗性',
+      title: '队友圣遗物：[翠绿之影] 根据扩散的元素类型，降低受到影响的敌人[kx]%的元素抗性 {此效果不叠加}',
       data: {
         kx: 40
       }
@@ -78,7 +78,7 @@ export const TeamArtifact = {
 
   被怜爱的少女: {
       check: ({ artis }) => artis['被怜爱的少女'] !== 4,
-      title: '施放元素战技或元素爆发后，队伍中所有角色受治疗效果加成提高[healInc]%',
+      title: '队友圣遗物：[被怜爱的少女] 施放元素战技或元素爆发后，队伍中所有角色受治疗效果加成提高[healInc]% {此效果不叠加}',
       data: {
         healInc: 20
       }
@@ -86,7 +86,7 @@ export const TeamArtifact = {
 
   千岩牢固: {
       check: ({ artis }) => artis['千岩牢固'] !== 4,
-      title: '元素战技命中敌人后，使队伍中附近的所有角色攻击力提升[atkPct]%，护盾强效提升[shield]%',
+      title: '队友圣遗物：[千岩牢固] 元素战技命中敌人后，使队伍中附近的所有角色攻击力提升[atkPct]%，护盾强效提升[shield]% {此效果不叠加}',
       data: {
         atkPct: 20,
         shield: 30
@@ -95,29 +95,29 @@ export const TeamArtifact = {
 
   深林的记忆: {
       check: ({ artis }) => artis['深林的记忆'] !== 4,
-      title: '元素战技或元素爆发命中敌人后，使命中目标的元素抗性降低[kx]%',
+      title: '队友圣遗物：[深林的记忆] 元素战技或元素爆发命中敌人后，使命中目标的元素抗性降低[kx]% {此效果不叠加}',
       data: {
         kx: ({ element }) => element === '草' ? 30 : 0
       }
   },
 
   昔时之歌: {
-      check: ({ artis }) => artis['昔时之歌'] !== 4,
-      title: '队伍中当前场上角色的普通攻击、重击、下落攻击、元素战技与元素爆发造成的伤害提高[aPlus]',
+      check: ({ artis, params }) => (artis['昔时之歌'] !== 4) && !params.TruceTime,
+      title: '队友圣遗物：[昔时之歌] 队伍中当前场上角色的普通攻击、重击、下落攻击、元素战技与元素爆发造成的伤害提高[aPlus] {此效果不叠加}',
       data: {
-        aPlus: ({ params }) => (params.TruceTime || 0) > 0 ? 0 : 1200,
-        a2Plus: ({ params }) => (params.TruceTime || 0) > 0 ? 0 : 1200,
-        a3Plus: ({ params }) => (params.TruceTime || 0) > 0 ? 0 : 1200,
-        ePlus: ({ params }) => (params.TruceTime || 0) > 0 ? 0 : 1200,
-        qPlus: ({ params }) => (params.TruceTime || 0) > 0 ? 0 : 1200
+        aPlus: 1200,
+        a2Plus: 1200,
+        a3Plus: 1200,
+        ePlus: 1200,
+        qPlus: 1200
       }
   },
 
   烬城勇者绘卷: {
       check: ({ artis }) => artis['烬城勇者绘卷'] !== 4,
-      title: '触发元素反应时，所有元素伤害加成与物理伤害加成提升[dmg]%',
+      title: '队友圣遗物：[烬城勇者绘卷] 触发元素反应时，所有元素伤害加成与物理伤害加成提升[dmg]% {此效果不叠加}',
       data: {
-        dmg: 40
+        dmg: ({ params }) => params.NatlanTeammate > 0 ? 40 : 0
       }
   },
 
@@ -177,10 +177,10 @@ export const TeamArtifact = {
 
   黑曜秘典: {},
 
-//未实装
-
   长夜之誓: {},
 
   深廊终曲: {}
+
+//未实装
 
 }
