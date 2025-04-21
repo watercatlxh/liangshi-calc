@@ -1,15 +1,11 @@
 import { Format , LSconfig } from '#liangshi'
 import { mainAttrData, ObTalentName, RankingKey } from '../index.js'
 import { CalcBuff } from './CalcBuff.js'
-import { recordData } from '../../../components/jsRecord.js'
 
 let CharacterName = "千织"
 let cfg = LSconfig.getConfig('user', 'config')
 let energy = cfg.energymodel || 0
 let TalentName = ObTalentName(CharacterName)
-let Tuid = ""
-let Tartis = ""
-let Tweapon = ""
 let T1e1Dmg = { avg: 0, dmg: 0 }
 let T1e2Dmg = { avg: 0, dmg: 0 }
 let T1e3Dmg = { avg: 0, dmg: 0 }
@@ -237,9 +233,8 @@ export const details = [
 },
 {
   title: '单人循环流畅度',
-  dmg: ({ talent , calc , attr , weapon , cons }) => {
+  dmg: ({ calc , attr , weapon }) => {
   let weaponn = 0
-  let consn = 0
   let weaponnn = 0
   let weaponconsn = 0
    if (weapon.name === '船坞长剑') {
@@ -250,9 +245,6 @@ export const details = [
    }
   if (weapon.name === '西风剑') {
     weaponn = 3 * 2 * 2
-  }
-  if (cons >= 4) {
-    consn = 4 * 3
   }
   if (weapon.name === '天空之刃') {
     weaponconsn = 1
@@ -285,7 +277,6 @@ export const details = [
     let cons2 = cons * 2 >= 1 ? 3 : 0
     let cons4 = cons * 4 >= 1 ? 3 : 0
     let weaponn = 0
-    let consn = 0
     let weaponnn = 0
     let weaponconsn = 0
     if (weapon.name === '船坞长剑') {
@@ -296,9 +287,6 @@ export const details = [
     }
     if (weapon.name === '西风剑') {
        weaponn = 3 * 2 * 2
-    }
-    if (cons >= 4) {
-       consn = 4 * 3
     }
     if (weapon.name === '天空之刃') {
        weaponconsn = 1
@@ -333,7 +321,6 @@ export const details = [
     let cons2 = cons * 2 >= 1 ? 3 : 0
     let cons4 = cons * 4 >= 1 ? 3 : 0
     let weaponn = 0
-    let consn = 0
     let weaponnn = 0
     let weaponconsn = 0
     if (weapon.name === '船坞长剑') {
@@ -344,9 +331,6 @@ export const details = [
     }
     if (weapon.name === '西风剑') {
        weaponn = 3 * 2 * 2
-    }
-    if (cons >= 4) {
-       consn = 4 * 3
     }
     if (weapon.name === '天空之刃') {
        weaponconsn = 1
@@ -377,36 +361,4 @@ export const details = [
       avg: (e1.avg * 3 + e2.avg * 10 + e3.avg * cons4) / 16
     }
   }
-},
-{
-  title: `阿千艾钟 ${TalentName.eName}释放`,// 直接QE
-  params: { SkillsUse: 1, SkillsHit: 14, SkillsDmg: 14, BurstUse: 1, BurstHit: 1, BurstDmg: 1, FightTime: 1, TruceTime: 14, EnergyDetermine: 0, BurningDetermine: true, ElementSame: 2, ElementDifferent: 1, ElementRockTeam: 2, ElementFireTeam: 1, ElementGrassTeam: 1, TeamRockDmg: 9, LiyueTeammate: 1,  FontaineTeammate: 1, ShieldTime: 14, CrystallizeNumber: 2, FireAttachment: 1, RockDmg: 15, EnergyTeammate: 200, team: true, Arlecchino: true, Zhong_Li: true, Emilie: true },
-  dmg: ({ talent, calc, attr }, { basic }) => {
-    T1e1Dmg = basic(talent.e['上挑攻击伤害2'][0] * calc(attr.atk) / 100 + talent.e['上挑攻击伤害2'][1] * calc(attr.def) / 100 , 'e')
-    return T1e1Dmg
-  }
-},
-{
-  title: `阿千艾钟 ${TalentName.eName}人偶`,
-  params: { SkillsUse: 1, SkillsHit: 14, SkillsDmg: 14, BurstUse: 1, BurstHit: 1, BurstDmg: 1, TruceTime: 14, BurningDetermine: true, ElementSame: 2, ElementDifferent: 1, ElementRockTeam: 2, ElementFireTeam: 1, ElementGrassTeam: 1, TeamRockDmg: 9, LiyueTeammate: 1,  FontaineTeammate: 1, ShieldTime: 14, CrystallizeNumber: 2, FireAttachment: 1, RockDmg: 15, EnergyTeammate: 200, team: true, Arlecchino: true, Zhong_Li: true, Emilie: true },
-  dmg: ({ talent, calc, attr }, { basic }) => {
-    T1e2Dmg = basic(talent.e['袖伤害2'][0] * calc(attr.atk) / 100 + talent.e['袖伤害2'][1] * calc(attr.def) / 100 , 'e')
-    return T1e2Dmg
-  }
-},
-{
-  title: `阿千艾钟 ${TalentName.qName}伤害`,
-  params: { SkillsUse: 1, SkillsHit: 14, SkillsDmg: 14, BurstUse: 1, BurstHit: 1, BurstDmg: 1, TruceTime: 14, BurningDetermine: true, ElementSame: 2, ElementDifferent: 1, ElementRockTeam: 2, ElementFireTeam: 1, ElementGrassTeam: 1, TeamRockDmg: 9, LiyueTeammate: 1,  FontaineTeammate: 1, ShieldTime: 14, CrystallizeNumber: 2, FireAttachment: 1, RockDmg: 15, EnergyTeammate: 200, team: true, Arlecchino: true, Zhong_Li: true, Emilie: true },
-  dmg: ({ talent, uid, weapon, artis, calc, attr, cons, level }, { basic }) => {
-    T1q1Dmg = basic(talent.q['技能伤害2'][0] * calc(attr.atk) / 100 + talent.q['技能伤害2'][1] * calc(attr.def) / 100 , 'q')
-    T1e3Dmg = cons >= 2 ? (basic((talent.e['袖伤害2'][0] * calc(attr.atk) / 100 + talent.e['袖伤害2'][1] * calc(attr.def) / 100) * 1.7, 'e')) : { avg: 0, dmg: 0 }
-    T1e4Dmg = cons >= 4 ? (basic((talent.e['袖伤害2'][0] * calc(attr.atk) / 100 + talent.e['袖伤害2'][1] * calc(attr.def) / 100), 'e')) : { avg: 0, dmg: 0 }
-    Tuid = uid
-    Tartis = artis
-    Tweapon = weapon
-    let TData = {base:{Tcharacter:{level,cons,talent},Tartis,Tweapon},dmg:{T1:{T1e1Dmg,T1e2Dmg,T1e3Dmg,T1e4Dmg,T1q1Dmg},T2:{}}}
-    recordData(`./plugins/liangshi-calc/damage/liangshi-gs/${CharacterName}/TeamData.json`, Tuid, TData, CharacterName)
-    return T1q1Dmg
-  }
-}
-]
+}]

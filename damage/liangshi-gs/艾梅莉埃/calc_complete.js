@@ -1,16 +1,11 @@
 import { LSconfig } from '#liangshi'
 import { mainAttrData, ObTalentName, RankingKey } from '../index.js'
 import { CalcBuff } from './CalcBuff.js'
-import { recordData } from '../../../components/jsRecord.js'
-import path from 'node:path'
 
 let CharacterName = "艾梅莉埃"
 let cfg = LSconfig.getConfig('user', 'config')
 let energy = cfg.energymodel || 0
 let TalentName = ObTalentName(CharacterName)
-let Tuid = ""
-let Tartis = ""
-let Tweapon = ""
 let T1e1Dmg = { avg: 0, dmg: 0 }
 let T1e2Dmg = { avg: 0, dmg: 0 }
 let T1q1Dmg = { avg: 0, dmg: 0 }
@@ -204,44 +199,6 @@ export const details = [
       dmg: aDmg + eDmg + qDmg + rs.avg * 4 * 14,
       avg: aAvg + eAvg + qAvg + rs.avg * 4 * 14
     }
-  }
-},
-// 这几个不管有没有用先简单记录一下，副C的数据应该用不到
-{
-  title: `阿千艾钟 ${TalentName.eNameT}释放伤害`, //默认角色挂在后台，护盾永续，强制目标燃烧
-  params: { Lingering_Fragrance: true, ShieldTime: 12, FightTime: 2, BurningDetermine: true, GrassAttachment: true, FireAttachment: true, ElementSame: 1, ElementDifferent: 3, ElementFireTeam: 1, ElementGrassTeam: 1, ElementRockTeam: 2, TeamRockDmg: 20, FontaineTeammate: 1, LiyueTeammate: 1, EnergyTeammate: 200, PrimordialDetermine: true, Chiori: true, Arlecchino: true, Zhong_Li: true, team: true },
-  dmg: ({ talent, uid, weapon, artis }, { basic }) => {
-    T1e1Dmg = basic(calc(attr.atk) * talent.e['技能伤害'] / 100, 'e')
-    return T1e1Dmg
-  }
-},
-{
-  title: `阿千艾钟 ${TalentName.eNameT}二阶单枚伤害`, //默认角色挂在后台，护盾永续，强制目标燃烧
-  params: { Lingering_Fragrance: true, ShieldTime: 12, TruceTime: 5, BurningDetermine: true, GrassAttachment: true, FireAttachment: true, ElementSame: 1, ElementDifferent: 3, ElementFireTeam: 1, ElementGrassTeam: 1, ElementRockTeam: 2, TeamRockDmg: 20, FontaineTeammate: 1, LiyueTeammate: 1, EnergyTeammate: 200, PrimordialDetermine: true, Chiori: true, Arlecchino: true, Zhong_Li: true, team: true },
-  dmg: ({ talent, uid, weapon, artis }, dmg) => {
-    Tuid = uid
-    Tartis = artis
-    Tweapon = weapon
-    T1e2Dmg = dmg(talent.e['柔灯之匣·二阶攻击伤害2'][0], 'e')
-    return T1e2Dmg
-  }
-},
-{
-  title: `阿千艾钟 ${TalentName.eNameT}三阶伤害`,
-  params: { ShieldTime: 12, TruceTime: 5, BurningDetermine: true, GrassAttachment: true, FireAttachment: true, ElementSame: 1, ElementDifferent: 3, ElementFireTeam: 1, ElementGrassTeam: 1, ElementRockTeam: 2, TeamRockDmg: 20, FontaineTeammate: 1, LiyueTeammate: 1, EnergyTeammate: 200, PrimordialDetermine: true, Chiori: true, Arlecchino: true, Zhong_Li: true, team: true },
-  dmg: ({ talent }, dmg) => {
-    T1q1Dmg = dmg(talent.q['柔灯之匣·三阶攻击伤害'], 'q')
-    return T1q1Dmg
-  }
-},
-{
-  title: '阿千艾钟 浸析伤害',
-  params: { Lingering_Fragrance: true, ShieldTime: 12, TruceTime: 5, BurningDetermine: true, GrassAttachment: true, FireAttachment: true, ElementSame: 1, ElementDifferent: 3, ElementFireTeam: 1, ElementGrassTeam: 1, ElementRockTeam: 2, TeamRockDmg: 20, FontaineTeammate: 1, LiyueTeammate: 1, EnergyTeammate: 200, PrimordialDetermine: true, Chiori: true, Arlecchino: true, Zhong_Li: true, team: true },
-  dmg: ({ calc, attr, level, cons, talent }, { basic }) => {
-    T1t1Dmg = basic(calc(attr.atk) * 500 / 100, '')
-    let TData = {base:{Tcharacter:{level, cons, talent}, Tartis, Tweapon}, dmg:{T1:{T1e1Dmg, T1e2Dmg, T1q1Dmg, T1t1Dmg}, T2:{}}}
-    recordData(`./plugins/liangshi-calc/damage/liangshi-gs/${CharacterName}/TeamData.json`, Tuid, TData, CharacterName)
-    return T1t1Dmg
   }
 }]
 

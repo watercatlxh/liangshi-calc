@@ -1,7 +1,6 @@
 import { Format , LSconfig } from '#liangshi'
 import { mainAttrData, ObTalentName, RankingKey } from '../index.js'
 import { CalcBuff } from './CalcBuff.js'
-import { recordData } from '../../../components/jsRecord.js'
 
 let CharacterName = "钟离"
 let cfg = LSconfig.getConfig('user', 'config')
@@ -136,9 +135,8 @@ export const details = [
 },
 {
   title: '单人循环流畅度',
-  dmg: ({ talent , calc , attr , weapon , cons }) => {
+  dmg: ({ calc, attr, weapon }) => {
   let weaponn = 0
-  let consn = 0
   let weaponnn = 0
   let weaponconsn = 0
     if (weapon.name === '西风长枪') {
@@ -176,7 +174,6 @@ export const details = [
     let q1 = dmg(talent.q['技能伤害'], 'q')
     let cons1 = cons * 1 >= 1 ? 1 : 0
     let weaponn = 0
-    let consn = 0
     let weaponnn = 0
     let weaponconsn = 0
     if (weapon.name === '西风长枪') {
@@ -202,34 +199,5 @@ export const details = [
       dmg: (aDmg + eDmg + qDmg) / 18,
       avg: (aAvg + eAvg + qAvg) / 18
     }
-  }
-},
-{
-  title: `阿千艾钟 ${TalentName.eName}长按`,
-  params: { BurningDetermine: true, FireAttachment: true, ElementSame: 2, ElementDifferent: 2, ElementRockTeam: 2, ElementFireTeam: 1, ElementGrassTeam: 1, TeamRockDmg: 14, EnergyTeammate: 200, team: true, Arlecchino: true, Chiori: true, Emilie: true },
-  dmg: ({ talent }, dmg) => {
-    T1e1Dmg = dmg(talent.e['长按伤害'], 'e')
-    return T1e1Dmg
-  }
-},
-{
-  title: `阿千艾钟 ${TalentName.eName}共鸣`,
-  params: { BurningDetermine: true, FireAttachment: true, ElementSame: 2, ElementDifferent: 2, ElementRockTeam: 2, ElementFireTeam: 1, ElementGrassTeam: 1, TeamRockDmg: 14, EnergyTeammate: 200, team: true, Arlecchino: true, Chiori: true, Emilie: true },
-  dmg: ({ talent }, dmg) => {
-    T1e2Dmg = dmg(talent.e['岩脊伤害/共鸣伤害'][1], 'e')
-    return T1e2Dmg
-  }
-},
-{
-  title: `阿千艾钟 ${TalentName.qName}伤害`,
-  params: { BurningDetermine: true, FireAttachment: true, ElementSame: 2, ElementDifferent: 2, ElementRockTeam: 2, ElementFireTeam: 1, ElementGrassTeam: 1, TeamRockDmg: 14, EnergyTeammate: 200, team: true, Arlecchino: true, Chiori: true, Emilie: true },
-  dmg: ({ artis, uid, weapon, level, cons, talent }, dmg) => {
-    T1q1Dmg = dmg(talent.q['技能伤害'], 'q')
-    let Tuid = uid
-    let Tartis = artis
-    let Tweapon = weapon
-    let TData = {base:{Tcharacter:{level, cons, talent}, Tartis, Tweapon}, dmg:{T1:{T1e1Dmg, T1e2Dmg, T1q1Dmg}, T2:{}}}
-    recordData(`./plugins/liangshi-calc/damage/liangshi-gs/${CharacterName}/TeamData.json`, Tuid, TData, CharacterName)
-    return T1q1Dmg
   }
 }]

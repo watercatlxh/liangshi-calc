@@ -270,7 +270,7 @@ export const details = [
 },
 {
   title: '单人循环流畅度',
-  dmg: ({ talent, calc, attr, weapon, cons }) => {
+  dmg: ({ calc, attr, weapon, cons }) => {
     let weaponn = 0
     let consn = 0
     let weaponnn = 0
@@ -343,99 +343,6 @@ export const details = [
     return {
       dmg: (aDmg + eDmg + qDmg) / 20,
       avg: (aAvg + eAvg + qAvg) / 20
-    }
-  }
-},
-{
-  title: `阿千艾钟 ${TalentName.a2Name}伤害`,
-  params: { blPlus: 30, blPct: 0.6326, simulate: true, ChangeBondOfLife: 12, NormalUse: 12, NormalHit: 14, NormalDmg: 14, NormalElement: 14, ShieldTime: 20, CrystallizeNumber: 3, FightTime: 6, FireAttachment: true, BurningDetermine: true, ElementSame: 1, ElementDifferent: 3, TeamRockDmg: 14, LiyueTeammate: 1, FontaineTeammate: 1 , EnergyTeammate: 200, ElementDifferent: 1, ElementRockTeam: 2, ElementFireTeam: 1, ElementGrassTeam: 1, Chiori: true, Emilie: true, Zhong_Li: true, team: true },
-  dmg: ({ talent }, dmg) => {
-    T1z1Dmg = dmg(talent.a['重击伤害'], 'a2')
-    return T1z1Dmg
-  }
-},
-
-{
-  title: `阿千艾钟 ${TalentName.aName}一段`,
-  params: { blPlus: 30, blPct: 0.6326, simulate: true, ChangeBondOfLife: 12, NormalUse: 12, NormalHit: 14, NormalDmg: 14, NormalElement: 14, ShieldTime: 20, CrystallizeNumber: 3, FightTime: 6, FireAttachment: true, BurningDetermine: true, ElementSame: 1, ElementDifferent: 3, TeamRockDmg: 14, LiyueTeammate: 1, FontaineTeammate: 1 , EnergyTeammate: 200, ElementDifferent: 1, ElementRockTeam: 2, ElementFireTeam: 1, ElementGrassTeam: 1, Chiori: true, Emilie: true, Zhong_Li: true, team: true },
-  dmg: ({ talent }, dmg) => {
-    T1a1Dmg = dmg(talent.a['一段伤害'], 'a')
-    return T1a1Dmg
-  }
-},
-
-{
-  title: `阿千艾钟 ${TalentName.eName}切斩伤害`,
-  params: { blPlus: 30, blPct: 0.6326, simulate: true, ChangeBondOfLife: 12, NormalUse: 12, NormalHit: 14, NormalDmg: 14, NormalElement: 14, ShieldTime: 20, CrystallizeNumber: 3, FightTime: 6, FireAttachment: true, BurningDetermine: true, ElementSame: 1, ElementDifferent: 3, TeamRockDmg: 14, LiyueTeammate: 1, FontaineTeammate: 1 , EnergyTeammate: 200, ElementDifferent: 1, ElementRockTeam: 2, ElementFireTeam: 1, ElementGrassTeam: 1, Chiori: true, Emilie: true, Zhong_Li: true, team: true },
-  dmg: ({ talent, calc, attr, cons }, { basic }) => {
-    T1e1Dmg = basic(calc(attr.atk) * talent.e['切斩伤害'] / 100, 'e')
-    T1e2Dmg = basic(calc(attr.atk) * talent.e['尖刺伤害'] / 100, 'e')
-    T1e3Dmg = basic(calc(attr.atk) * talent.e['血偿勒令伤害'] / 100, 'e')
-    T1e4Dmg = cons >= 2 ? basic(calc(attr.atk) * 900 / 100, 'e') : { avg: 0, dmg: 0 }
-    return T1e1Dmg
-  }
-},
-{
-  title: '阿千艾钟 队伍单轮总伤', // 如果更新过队友面板会使用自己的角色组队进行计算,注意：队友的伤害不会因当前面板设定的敌人等级而调整，需要呼出队友面板才可刷新
-  params: { blPlus: 30, blPct: 0.6326, simulate: true, ChangeBondOfLife: 12, NormalUse: 12, NormalHit: 14, NormalDmg: 14, NormalElement: 14, ShieldTime: 20, CrystallizeNumber: 3, FightTime: 6, FireAttachment: true, BurningDetermine: true, ElementSame: 1, ElementDifferent: 3, TeamRockDmg: 14, LiyueTeammate: 1, FontaineTeammate: 1 , EnergyTeammate: 200, ElementDifferent: 1, ElementRockTeam: 2, ElementFireTeam: 1, ElementGrassTeam: 1, Chiori: true, Emilie: true, Zhong_Li: true, team: true },
-  dmg: ({ talent, calc, attr, cons, uid, level, artis, weapon }, { basic, reaction }) => {
-   let EmilieCons = !EmilieTeam[uid] ? cons : EmilieTeam[uid]?.base?.Tcharacter?.cons
-// 依次计入每个角色伤害
-// 阿蕾奇诺 2轮普攻 1E 1重
-   let rs = reaction('burning')
-   let A2 = basic(calc(attr.atk) * talent.a['二段伤害'] / 100, 'a')
-   let A3 = basic(calc(attr.atk) * talent.a['三段伤害'] / 100, 'a')
-   let A4 = basic(calc(attr.atk) * talent.a['四段伤害'] / 100 / 2, 'a')
-   let A5 = basic(calc(attr.atk) * talent.a['五段伤害'] / 100, 'a')
-   let A6 = basic(calc(attr.atk) * talent.a['六段伤害'] / 100, 'a')
-   let ArlecchinoDmg = T1z1Dmg.dmg + (T1a1Dmg.dmg + A2.dmg + A3.dmg + A4.dmg * 2 + A5.dmg + A6.dmg) * 2 + T1e4Dmg.dmg + T1e1Dmg.dmg +T1e2Dmg.dmg + T1e3Dmg.dmg + rs.avg * 20 * 4
-   let ArlecchinoAvg = T1z1Dmg.avg + (T1a1Dmg.avg + A2.avg + A3.avg + A4.avg * 2 + A5.avg + A6.avg) * 2 + T1e4Dmg.avg + T1e1Dmg.avg +T1e2Dmg.avg + T1e3Dmg.avg + rs.avg * 20 * 4
-// 艾梅莉埃（1E 8*2协 4Q 8Q[4命] 2T 3T[1命] 2T[6命]）
-   let EmilieE1 = EmilieTeam[uid]?.dmg?.T1?.T1e1Dmg ?? { dmg: 4539.27, avg: 4085.34 }
-   let EmilieE2 = EmilieTeam[uid]?.dmg?.T1?.T1e2Dmg ?? { dmg: 10842.76, avg: 9758.48 }
-   let EmilieQ1 = EmilieTeam[uid]?.dmg?.T1?.T1q1Dmg ?? { dmg: 28184.76, avg: 25366.28 }
-   let EmilieT1 = EmilieTeam[uid]?.dmg?.T1?.T1t1Dmg ?? { dmg: 37387.44, avg: 33648.69 }
-   let EmilieDmg = EmilieQ1.dmg * (EmilieCons >= 4 ? 12 : 4) + EmilieE1.dmg + EmilieE2.dmg * 8 * 2 + (EmilieCons >= 6 ? (EmilieCons >= 1 ? 5 : 2) : 7) * EmilieT1.dmg
-   let EmilieAvg = EmilieQ1.avg * (EmilieCons >= 4 ? 12 : 4) + EmilieE1.avg + EmilieE2.avg * 8 * 2 + (EmilieCons >= 6 ? (EmilieCons >= 1 ? 5 : 2) : 7) * EmilieT1.avg
-// 千织 （1E 10斩 2协 3绢[4命]）
-   let ChioriE1 = ChioriTeam[uid]?.dmg?.T1?.T1e1Dmg ?? { dmg: 28663.2, avg: 25796.88 }
-   let ChioriE2 = ChioriTeam[uid]?.dmg?.T1?.T1e2Dmg ?? { dmg: 13387.68, avg: 12048.91 }
-   let ChioriE3 = ChioriTeam[uid]?.dmg?.T1?.T1e3Dmg ?? { dmg: 22759.05, avg: 20483.15 }
-   let ChioriE4 = ChioriTeam[uid]?.dmg?.T1?.T1e4Dmg ?? { dmg: 28663.2, avg: 25796.88 }
-   let ChioriQ1 = ChioriTeam[uid]?.dmg?.T1?.T1q1Dmg ?? { dmg: 46981.08, avg: 42282.97 }
-   let ChioriDmg = ChioriE1.dmg * 3 + ChioriE2.dmg * 10 + ChioriE3.dmg * 4 + ChioriE4.dmg * 3
-   let ChioriAvg =  ChioriE1.avg * 3 + ChioriE2.avg * 10 + ChioriE3.avg * 4 + ChioriE4.avg * 3
-// 钟离 （10E共鸣 1长E 1Q）
-   let Zhong_LiE1 = Zhong_LiTeam[uid]?.dmg?.T1?.T1e1Dmg ?? { dmg: 3398.76, avg: 3058.88 }
-   let Zhong_LiE2 = Zhong_LiTeam[uid]?.dmg?.T1?.T1e2Dmg ?? { dmg: 2290.68, avg: 2061.61 }
-   let Zhong_LiQ1 = Zhong_LiTeam[uid]?.dmg?.T1?.T1q1Dmg ?? { dmg: 34728.48, avg: 31255.63 }
-   let Zhong_LiDmg = Zhong_LiE1.dmg + Zhong_LiE2.dmg * 10 + Zhong_LiQ1.dmg
-   let Zhong_LiAvg = Zhong_LiE1.avg + Zhong_LiE2.avg * 10 + Zhong_LiQ1.avg
-// 合并伤害
-   let T1Dmg = ArlecchinoDmg + EmilieDmg + ChioriDmg + Zhong_LiDmg
-   let T1Avg = ArlecchinoAvg + EmilieAvg + ChioriAvg + Zhong_LiAvg
-   let T1allDmg = undefined
-   if (EmilieTeam[uid]?.dmg?.T1?.T1e1Dmg && ChioriTeam[uid]?.dmg?.T1?.T1e1Dmg && Zhong_LiTeam[uid]?.dmg?.T1?.T1e1Dmg) {
-     // 全部队友伤害都是json中的才写入完整队伍伤害
-     T1allDmg = { dmg: T1Dmg, avg: T1Avg }
-   }
-
-// 如果你想看到队伍伤害组成可以把下面的注释去掉
-/*
-console.log("------------------------------------------------------")
-console.log("队伍总伤:", T1Avg)
-console.log("阿蕾奇诺:", ArlecchinoAvg, "(", ArlecchinoAvg / T1Avg * 100, "%)")
-console.log("艾梅莉埃:", EmilieAvg, "(", EmilieAvg / T1Avg * 100, "%)")
-console.log("千织:", ChioriAvg, "(", ChioriAvg / T1Avg * 100, "%)")
-console.log("钟离:", Zhong_LiAvg, "(", Zhong_LiAvg / T1Avg * 100, "%)")
-console.log("------------------------------------------------------")
-*/
-
-   let TData = {base:{Tcharacter:{level, cons, talent}, Tartis: artis, Tweapon: weapon}, dmg:{T1:{T1e1Dmg, T1e2Dmg, T1e3Dmg, T1e4Dmg, T1z1Dmg, T1z1Dmg, T1allDmg}, T2:{}}}
-   recordData(`./plugins/liangshi-calc/damage/liangshi-gs/${CharacterName}/TeamData.json`, uid, TData, CharacterName)
-    return {
-      dmg: T1Dmg,
-      avg: T1Avg
     }
   }
 }]
