@@ -5,11 +5,37 @@
 
 打开Yunzai-Bot 根目录输入
 
-<details><summary>跑路了</summary>
+<details><summary>更新状态与进度</summary>
 
-跑路了，有空就更新，没空就没空
+---
+### 原神 - gs
 
-![](./resources/LLQ.jpg)
+已支持：105 (98.13%) | 已重置：105 (98.13%) | 已完成：0 (0%)
+
+###### 当前维护状态 (Ke_Akatsuki)
+
+Ke_Akatsuki (2024.10.06 - 当前)
+
+liangshi (2023.5.10 - 2025.1.15)
+
+---
+### 鸣潮 - mc
+已支持：1 (2.56%) | 已重置：1 (2.56%) | 已完成：1 (2.56%)
+
+###### 当前维护状态 (liangshi)
+
+liangshi (2025.5.27 - 当前)
+
+---
+### 星铁 - sr
+已支持：66 (88%)| 已重置：24 (32%)| 已完成：0 (0%)
+
+###### 当前维护状态 (无)
+
+liangshi (2023.6.14 - 2025.3.5)
+
+> 当前无人维护，建议在设置中关闭liangshi-calc的星铁计算，使用miao-plugin本身的计算或安装其他星铁计算
+---
 
 </details>
 
@@ -102,17 +128,19 @@ calcmodel: liangshi #你安装计算的名字（例如abc-gs，就填abc）
 
 重启Bot
 
-> 由于个人时间精力有限，后续自带的计算基本不再会更新新角色，建议安装其他仓库的计算避免后续角色无计算
-
 </details>
 
 ---
 
 > 其他资源位置
 
-|名称|gitee|github|
-|:----:|:----:|:----:|
-|Yunzai-Bot | [gitee](https://gitee.com/le-niao/Yunzai-Bot) | [github](https://github.com/le-niao/Yunzai-Bot) |
-|Yunzai-Miao| [gitee](https://gitee.com/yoimiya-kokomi/Yunzai-Bot) | [github](https://github.com/yoimiya-kokomi/Yunzai-Bot) |
-|Miao-Yunzai | [gitee](https://gitee.com/yoimiya-kokomi/Miao-Yunzai) | [github](https://github.com/yoimiya-kokomi/Miao-Yunzai) |
-|Miao-Plugin | [gitee](https://gitee.com/yoimiya-kokomi/miao-plugin) | [github](https://github.com/yoimiya-kokomi/miao-plugin) |
+无鸣潮版：Nmc分支
+
+组队修正版：team分支
+
+|     名称      |                         gitee                         |                         github                          |
+|:-----------:|:-----------------------------------------------------:|:-------------------------------------------------------:|
+| Yunzai-Bot  |     [gitee](https://gitee.com/le-niao/Yunzai-Bot)     |     [github](https://github.com/le-niao/Yunzai-Bot)     |
+| Yunzai-Miao | [gitee](https://gitee.com/yoimiya-kokomi/Yunzai-Bot)  | [github](https://github.com/yoimiya-kokomi/Yunzai-Bot)  |
+| Miao-Yunzai | [gitee](https://gitee.com/yoimiya-kokomi/Miao-Yunzai) | [github](https://github.com/yoimiya-kokomi/Miao-Yunzai) |
+| Miao-Plugin | [gitee](https://gitee.com/yoimiya-kokomi/miao-plugin) | [github](https://github.com/yoimiya-kokomi/miao-plugin) |
