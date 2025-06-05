@@ -155,15 +155,15 @@ export const AllCalc = [
     dmg: ({ talent }, dmg) => {
       let ldmg = dmg(talent.l['技能伤害'], 'l')
       return {
-        dmg: ldmg.dmg * 8,
-        avg: ldmg.avg * 8
+        dmg: ldmg.dmg,
+        avg: ldmg.avg
       }
     }
   },
   {
     title: `赦罪延奏伤害`,
     dmgKey: 'o',
-    params: { Spectro_Frazzle: 3, Prayer: "Absolution" },
+    params: { Spectro_Frazzle: 3, Prayer: "Absolution", OutroUse: 1, OutroHit: 8, OutroDmg: 8, ConcertoUse: 1 },
     dmg: ({}, dmg) => {
       let odmg = dmg(97.92625, 'o')
       return {
@@ -174,7 +174,7 @@ export const AllCalc = [
   },
   {
     title: `告解延奏伤害`,
-    params: { Spectro_Frazzle: 3, Prayer: "Confession" },
+    params: { Spectro_Frazzle: 3, Prayer: "Confession", OutroUse: 1, OutrooHit: 8, OutroDmg: 8, ConcertoUse: 1 },
     dmg: ({}, dmg) => {
       let odmg = dmg(66.05125, 'o')
       return {
