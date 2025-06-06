@@ -54,7 +54,7 @@ export const resonanceBuffGs = [{
   data: {
     mastery: 80
   }
-{
+},
 {
   check: ({ params }) => params.ElementGrassTeam >= 2 && (params.ElementMineTeam >= 1 || (params.ElementFireTeam >= 1 && params.ElementWaterTeam >= 1)),
   title: '元素共鸣：[蔓生之草(激化/激绽/烈绽队)] 触发超激化、蔓激化或超绽放、烈绽放反应后，提升元素精通[mastery]点',
@@ -67,5 +67,14 @@ export const resonanceBuffGs = [{
   title: '元素共鸣：[交织之护] 全元素与物理抗性提升[_res]%',
   data: {
     _res: 15
+  }
+}]
+
+export const NegativeStatusMc = [{
+  check: ({ params }) => params.De_Electro_Flare > 0,
+  title: '异常效应：[电磁效应] 角色被附加[buff]层电磁效应，攻击力提升[atkPct]%',
+  data: {
+    buff: ({ params }) => params.De_Electro_Flare || 0,
+    atkPct: ({ params }) => 0 - ((params.De_Electro_Flare || 0) > 0 ? 5 : 0) - ((params.De_Electro_Flare || 0) > 4 ? 2 : 0) - ((params.De_Electro_Flare || 0) > 9 ? 3 : 0)
   }
 }]

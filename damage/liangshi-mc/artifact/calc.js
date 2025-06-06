@@ -34,7 +34,7 @@ export const buffs = {
   啸谷长风: {
     2: attr('dmg', 10, '气动'),
     5: {
-      check: ({ element }) => element === '气动',
+      check: ({ element, params }) => element === '气动' && (params.IntroUse || 1) > 0,
       title: '变奏登场时，伤害提升[dmg]%',
       data: {
         dmg: 30
@@ -44,7 +44,7 @@ export const buffs = {
   浮星祛暗: {
     2: attr('dmg', 10, '衍射'),
     5: {
-      check: ({ element }) => element === '衍射',
+      check: ({ element, params }) => element === '衍射' && (params.IntroUse || 1) > 0,
       title: '变奏登场时，伤害提升[dmg]%',
       data: {
         dmg: 30
@@ -106,9 +106,9 @@ export const buffs = {
     5: {
       title: '为角色添加光噪效应时，暴击提升[cpct]%，目标存在[buff]层光噪效应，伤害提升[dmg]%',
       data: {
-        buff: ({ params }) => params.Aero_Erosion || 0,
-        cpct: ({ params }) => params.Aero_Erosion_Determine === true ? 20 : 0,
-        dmg: ({ element }) => element === '衍射' ? ((params.Aero_Erosion || 0) >= 10 ? 15 : 0) : 0
+        buff: ({ params }) => params.Spectro_Frazzle || 0,
+        cpct: ({ params }) => params.Spectro_Frazzle_Determine === true ? 20 : 0,
+        dmg: ({ element }) => element === '衍射' ? ((params.Spectro_Frazzle || 0) >= 10 ? 15 : 0) : 0
       }
     }
   },
