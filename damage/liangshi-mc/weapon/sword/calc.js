@@ -135,11 +135,11 @@ export default function (step, staticStep) {
       }
     }],
     "不屈命定之冠": [staticStep('hpPct', 12), {
-      title: '[自由骑士之舞] 造成普攻伤害[buff]次，施放共鸣解放[buffC]次，普攻伤害加成提升[aDmg]%',
+      check: ({ params }) => ((params.IntroUse || 1) + (params.NormalUse || 1)) > 0,
+      title: '[自由骑士之舞] 释放变奏技能或普攻后，无视目标[ignore]%防御力，造成的伤害加深[dmg]%',
       data: {
-        buff: ({ params }) => params.NormalDmg || 1,
-        buffC: ({ params }) => params.BurstUse || 0,
-        aDmg: ({ params, refine }) => ((params.NormalDmg || 1) >= 0 ? step(24)[refine] : 0) + ((params.BurstUse || 0) >= 0 ? step(24)[refine] : 0)
+        ignore: ({ refine }) => step(8)[refine],
+        dmg: ({ params, refine }) => (params.Aero_Erosion || 0) >= 1 ? step(20)[refine] : 0
       }
     }]
   }

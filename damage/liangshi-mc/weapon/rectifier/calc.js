@@ -72,13 +72,14 @@ export default function (step, staticStep) {
       }
     },
     "清音": {
-      title: '[彼岸眼瞳] 释放共鸣解放后，攻击提升[atkPct]%',
+      check: ({ params }) => params.BurstUse > 0,
+      title: '[刚柔并出] 释放共鸣解放后，攻击提升[atkPct]%',
       refine: {
         atkPct: step(15)
       }
     },
     "核熔星盘": {
-      title: '[忠诚卫士] 施放共鸣技能时，获得[_energyevery]点共鸣能量，且攻击提升[atkPct]%',
+      title: '[彼岸眼瞳] 施放共鸣技能时，获得[_energyevery]点共鸣能量，且攻击提升[atkPct]%',
       refine: {
         _energyevery: step(6, 1),
         atkPct: step(10)
