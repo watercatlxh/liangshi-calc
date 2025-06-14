@@ -44,7 +44,7 @@ export const AllCalc = [
   {
     title: `${TalentName.a2Name}伤害`,
     params: { ChargedUse: 1, ChargedHit: 1, ChargedDmg: 1 },
-    dmg: ({ talent }, dmg) => dmg(talent.a['重击伤害2'], 'a2')
+    dmg: ({ talent }, dmg) => dmg(talent.a['重击伤害'], 'a2')
   },
   {
     title: `${TalentName.a2Name}演绎伤害`,
