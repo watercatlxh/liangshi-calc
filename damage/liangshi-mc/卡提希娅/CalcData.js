@@ -133,6 +133,17 @@ export const AllCalc = [
     }
   },
   {
+    title: '芙-上挑攻击伤害',
+    params: ({ cons }) => ({ OwnHp: 50, Resolve: 120, PlayName: "Fleurdelys", Aero_Erosion: cons >= 2 ? 6 : 3, ChargedUse: 2, NormalHit: 6, NormalDmg: 6 }),
+    dmg: ({ talent, attr, calc }, { basic }) => {
+      let a1 = basic(calc(attr.hp) * talent.t['上挑攻击伤害2'][0] / 100, 'a')
+      return {
+        dmg: a1.dmg * 2,
+        avg: a1.avg * 2
+      }
+    }
+  },
+  {
     title: `卡-${TalentName.a3Name}伤害`,
     params: { PlayName: "Cartethyia", PlungingUse: 1, PlungingHit: 1, PlungingDmg: 1, fly: true },
     dmg: ({ talent, attr, calc }, { basic }) => basic(calc(attr.hp) * talent.a['空中攻击伤害'] / 100, 'a3')
@@ -202,6 +213,41 @@ export const AllCalc = [
       return {
         dmg: e1.dmg * 3 + e2.dmg,
         avg: e1.avg * 3 + e2.avg
+      }
+    }
+  },
+  {
+    title: `芙-${TalentName.eName}一段伤害`,
+    params: ({ cons }) => ({ OwnHp: 50, Resolve: 120, PlayName: "Fleurdelys", Aero_Erosion: cons >= 2 ? 6 : 3, SkillsUse: 1, SkillsHit: 5, SkillsDmg: 5, fly: true }),
+    dmg: ({ talent, attr, calc }, { basic }) => {
+      let e1 = basic(calc(attr.hp) * talent.t['共鸣技能·此剑为潮浪之意伤害2'][0] / 100, 'e')
+      let e2 = basic(calc(attr.hp) * talent.t['共鸣技能·此剑为潮浪之意伤害2'][1] / 100, 'e')
+      return {
+        dmg: e1.dmg * 4 + e2.dmg,
+        avg: e1.avg * 4 + e2.avg
+      }
+    }
+  },
+  {
+    title: `芙-${TalentName.eName}二段伤害`,
+    params: ({ cons }) => ({ OwnHp: 50, Resolve: 120, PlayName: "Fleurdelys", Aero_Erosion: cons >= 2 ? 6 : 3, SkillsUse: 2, SkillsHit: 10, SkillsDmg: 10, fly: true }),
+    dmg: ({ talent, attr, calc }, { basic }) => {
+      let e1 = basic(calc(attr.hp) * talent.t['共鸣技能·凭风斩浪破敌伤害2'][0] / 100, 'e')
+      let e2 = basic(calc(attr.hp) * talent.t['共鸣技能·凭风斩浪破敌伤害2'][1] / 100, 'e')
+      return {
+        dmg: e1.dmg * 2 + e2.dmg * 3,
+        avg: e1.avg * 2 + e2.avg * 3
+      }
+    }
+  },
+  {
+    title: `芙-${TalentName.qName}伤害`, // 释放过程中进行移动等操作会提前进入卡提希娅状态使最后二段伤害丢失芙露德莉斯相关BUFF
+    params: ({ cons }) => ({ OwnHp: 50, Resolve: 120, PlayName: "Fleurdelys", Aero_Erosion: cons >= 2 ? 6 : 3, SkillsUse: 2, SkillsHit: 10, SkillsDmg: 10, BurstUse: 1, BurstHit: 7, BurstDmg: 7, EnergyUse: 1, fly: true }),
+    dmg: ({ talent, attr, calc }, { basic }) => {
+      let q1 = basic(calc(attr.hp) * talent.q['看潮怒风哮之刃伤害2'][0] / 100, 'q')
+      return {
+        dmg: q1.dmg * 7,
+        avg: q1.avg * 7
       }
     }
   }

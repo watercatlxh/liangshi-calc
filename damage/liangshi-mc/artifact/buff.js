@@ -2,11 +2,39 @@ export const ArtifactBuffs = {
   // cons4
    // 海啸级
 
-  "无妄者": {},
-  "角": {},
-  "赫卡忒": {},
-  "共鸣回响·芙露德莉斯": {},
-  "鸣钟之龟": {},
+  "无妄者": {
+    check: ({ characterName }) => characterName === '漂泊者·湮灭',
+    title: '声骸技能：[无妄者] 施放共鸣解放·临渊死寂后，声骸技能造成的伤害提升[rDmg]%',
+    data: {
+      rDmg: 50
+    }
+  },
+  "角": {
+    title: '声骸技能：[角] 施放声骸技能时，自身的共鸣技能伤害加成提升[eDmg]%',
+    data: {
+      eDmg: 16
+    }
+  },
+  "赫卡忒": {
+    title: '声骸技能：[赫卡忒] 在首位装配该声骸技能时，自身协同攻击造成的伤害提升[xDmg]%',
+    data: {
+      xDmg: 40
+    }
+  },
+  "共鸣回响·芙露德莉斯": {
+    title: '声骸技能：[共鸣回响·芙露德莉斯] 在首位装配该声骸技能时，伤害加成提升[dmg]%',
+    data: {
+      dmg: ({ characterName, element }) => element === '气动' ? (['漂泊者·气动', '卡提希娅'].includes(characterName) ? 20 : 10) : 0
+    }
+  },
+  "鸣钟之龟": {
+    check: ({ params }) => !params.TruceTime,
+    title: '声骸技能：[鸣钟之龟] 为队伍中登场角色提供的[dmg]%减伤和[dmg]%的伤害提升',
+    data: {
+      _reduction: 50,
+      dmg: 10
+    }
+  },
 
    //怒涛级
 

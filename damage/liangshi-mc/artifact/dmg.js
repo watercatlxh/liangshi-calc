@@ -2,11 +2,74 @@ export const ArtifactDmg = {
   // cons4
   // 海啸级
 
-  "无妄者": {},
-  "角": {},
-  "赫卡忒": {},
-  "共鸣回响·芙露德莉斯": {},
-  "鸣钟之龟": {},
+  "无妄者": {
+    title: '无妄者声骸伤害',
+    params: { EchoUse: 4, EchoHit: 6, EchoDmg: 6 },
+    dmg: ({ EchoStar, element }, dmg) => {
+      let r1 = dmg([33.8, 38.87, 43.94, 49.01, 54.08][EchoStar - 1], 'r')
+      let r2 = dmg([169, 194.35, 219.70, 245.05, 270.4][EchoStar - 1], 'r')
+      let r3 = dmg([33.8, 38.87, 43.94, 49.01, 54.08][EchoStar - 1], 'r', 'scene')
+      let r4 = dmg([169, 194.35, 219.70, 245.05, 270.4][EchoStar - 1], 'r', 'scene')
+      return {
+        dmg: element === '湮灭' ? (r1.dmg * 5 + r2.dmg) : (r3.dmg * 5 + r4.dmg),
+        avg: element === '湮灭' ? (r1.avg * 5 + r2.avg) : (r3.avg * 5 + r4.avg)
+      }
+    }
+  },
+  "角": {
+    title: '角声骸伤害',
+    params: { EchoUse: 1, EchoHit: 8, EchoDmg: 8 },
+    dmg: ({ EchoStar, element }, dmg) => {
+      let r1 = dmg([30.4, 34.96, 39.52, 44.08, 48.64][EchoStar - 1], 'r')
+      let r2 = dmg([12.12, 13.98, 15.81, 17.63, 19.46][EchoStar - 1], 'r')
+      let r3 = dmg([30.4, 34.96, 39.52, 44.08, 48.64][EchoStar - 1], 'r')
+      let r4 = dmg([30.4, 34.96, 39.52, 44.08, 48.64][EchoStar - 1], 'r', 'scene')
+      let r5 = dmg([12.12, 13.98, 15.81, 17.63, 19.46][EchoStar - 1], 'r', 'scene')
+      let r6 = dmg([30.4, 34.96, 39.52, 44.08, 48.64][EchoStar - 1], 'r', 'scene')
+      return {
+        dmg: element === '衍射' ? (r1.dmg + r2.dmg * 5 + r3.dmg * 2) : (r4.dmg + r5.dmg * 5 + r6.dmg * 2),
+        avg: element === '衍射' ? (r1.avg + r2.avg * 5 + r3.avg * 2) : (r4.avg + r5.avg * 5 + r6.avg * 2)
+      }
+    }
+  },
+  "赫卡忒": {
+    title: '赫卡忒声骸单段',
+    params: { EchoUse: 1, EchoHit: 3, EchoDmg: 3 },
+    dmg: ({ EchoStar, element }, dmg) => {
+      let r1 = dmg([25.37, 30.4, 35.46, 40.53, 45.59][EchoStar - 1], 'r')
+      let r2 = dmg([25.37, 30.4, 35.46, 40.53, 45.59][EchoStar - 1], 'r', 'scene')
+      return {
+        dmg: element === '湮灭' ? r1.dmg : r2.dmg,
+        avg: element === '湮灭' ? r1.avg : r2.avg
+      }
+    }
+  },
+  "共鸣回响·芙露德莉斯": {
+    title: '共鸣回响·芙露德莉斯声骸伤害',
+    params: { EchoUse: 1, EchoHit: 9, EchoDmg: 9 },
+    dmg: ({ EchoStar, element }, dmg) => {
+      let r1 = dmg([15.2, 18.24, 21.28, 24.32, 27.36][EchoStar - 1], 'r')
+      let r2 = dmg([76, 91.2, 106.4, 121.6, 136.8][EchoStar - 1], 'r')
+      let r3 = dmg([15.2, 18.24, 21.28, 24.32, 27.36][EchoStar - 1], 'r', 'scene')
+      let r4 = dmg([76, 91.2, 106.4, 121.6, 136.8][EchoStar - 1], 'r', 'scene')
+      return {
+        dmg: element === '气动' ? (r1.dmg * 8 + r2.dmg) : (r3.dmg * 8 + r4.dmg),
+        avg: element === '气动' ? (r1.avg * 8 + r2.avg) : (r3.avg * 8 + r4.avg)
+      }
+    }
+  },
+  "鸣钟之龟": {
+    title: '鸣钟之龟声骸伤害',
+    params: { EchoUse: 1, EchoHit: 1, EchoDmg: 1 },
+    dmg: ({ EchoStar, element }, dmg) => {
+      let r1 = dmg([91.2, 104.88, 118.56, 132.24, 145.92][EchoStar - 1], 'r')
+      let r2 = dmg([91.2, 104.88, 118.56, 132.24, 145.92][EchoStar - 1], 'r', 'scene')
+      return {
+        dmg: element === '冷凝' ? r1.dmg : r2.dmg,
+        avg: element === '冷凝' ? r1.avg : r2.avg
+      }
+    }
+  },
 
   //怒涛级
 

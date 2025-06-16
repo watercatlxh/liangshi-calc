@@ -128,7 +128,7 @@ export const AllCalc = [
   {
     title: `${TalentName.qName}协同伤害`,
     params: { BurstUse: 1, BurstDmg: 3, BurstHit: 3, EnergyUse: 1, HealNumber: 2, Photosynthesis_Mark: true },
-    dmg: ({ talent }, dmg) => dmg(talent.q['协同攻击伤害'], 'q')
+    dmg: ({ talent }, dmg) => dmg(talent.q['协同攻击伤害'], 'q,x')
   },
   {
     title: `${TalentName.qName}协同治疗`,
