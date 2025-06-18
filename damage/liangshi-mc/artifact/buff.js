@@ -29,7 +29,7 @@ export const ArtifactBuffs = {
   },
   "鸣钟之龟": {
     check: ({ params }) => !params.TruceTime,
-    title: '声骸技能：[鸣钟之龟] 为队伍中登场角色提供的[dmg]%减伤和[dmg]%的伤害提升',
+    title: '声骸技能：[鸣钟之龟] 为队伍中登场角色提供的[_reduction]%减伤和[dmg]%的伤害提升',
     data: {
       _reduction: 50,
       dmg: 10

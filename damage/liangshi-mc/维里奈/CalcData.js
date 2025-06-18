@@ -36,32 +36,6 @@ export const AllCalc = [
     dmg: ({ talent }, dmg) => dmg(talent.a['第五段伤害'], 'a')
   },
   {
-    title: `${TalentName.a3Name}星星花绽放一段`,
-    params: { PlungingUse: 1, PlungingHit: 1, PlungingDmg: 1, fly: true, Photosynthesis_Energy: 4, HealNumber: 1 },
-    dmg: ({ talent }, dmg) => dmg(talent.a['空中攻击·星星花绽放第一段伤害'], 'a3')
-  },
-  {
-    title: `${TalentName.a3Name}星星花绽放二段`,
-    params: { PlungingUse: 2, PlungingHit: 2, PlungingDmg: 2, fly: true, Photosynthesis_Energy: 3, HealNumber: 2 },
-    dmg: ({ talent }, dmg) => dmg(talent.a['空中攻击·星星花绽放第二段伤害'], 'a3')
-  },
-  {
-    title: `${TalentName.a3Name}星星花绽放三段`,
-    params: { PlungingUse: 3, PlungingHit: 5, PlungingDmg: 5, fly: true, Photosynthesis_Energy: 2, HealNumber: 3 },
-    dmg: ({ talent }, dmg) => {
-      let a3 = dmg(talent.a['空中攻击·星星花绽放第三段伤害2'][0], 'a3')
-      return {
-        dmg: a3.dmg * 3,
-        avg: a3.avg * 3
-      }
-    }
-  },
-  {
-    title: '星星花绽放治疗',
-    params: { NormalUse: 4, NormalHit: 6, NormalDmg: 6, HealNumber: 4, fly: true, Photosynthesis_Energy: 1 },
-    dmg: ({ attr, calc, talent }, { heal }) => heal(talent.t['星星花绽放治疗量2'][0] + talent.t['星星花绽放治疗量2'][1] * calc(attr.atk) / 100)
-  },
-  {
     title: `${TalentName.a2Name}伤害`,
     params: { ChargedUse: 1, ChargedHit: 1, ChargedDmg: 1 },
     dmg: ({ talent }, dmg) => dmg(talent.a['重击伤害'], 'a2')
@@ -74,23 +48,49 @@ export const AllCalc = [
   {
     title: `${TalentName.a3Name}一段伤害`,
     params: { PlungingUse: 1, PlungingHit: 1, PlungingDmg: 1, fly: true },
-    dmg: ({ talent }, dmg) => dmg(talent.a['空中攻击第一段伤害'], 'a3')
+    dmg: ({ talent }, dmg) => dmg(talent.a['空中攻击第一段伤害'], 'a,a3')
   },
   {
     title: `${TalentName.a3Name}二段伤害`,
     params: { PlungingUse: 2, PlungingHit: 2, PlungingDmg: 2, fly: true },
-    dmg: ({ talent }, dmg) => dmg(talent.a['空中攻击第二段伤害'], 'a3')
+    dmg: ({ talent }, dmg) => dmg(talent.a['空中攻击第二段伤害'], 'a,a3')
   },
   {
     title: `${TalentName.a3Name}三段伤害`,
     params: { PlungingUse: 3, PlungingHit: 4, PlungingDmg: 4, fly: true },
     dmg: ({ talent }, dmg) => {
-      let a3 = dmg(talent.a['空中攻击第三段伤害2'][0], 'a3')
+      let a3 = dmg(talent.a['空中攻击第三段伤害2'][0], 'a,a3')
       return {
         dmg: a3.dmg * 2,
         avg: a3.avg * 2
       }
     }
+  },
+  {
+    title: `${TalentName.a3Name}星星花绽放一段`,
+    params: { PlungingUse: 1, PlungingHit: 1, PlungingDmg: 1, fly: true, Photosynthesis_Energy: 4, HealNumber: 1 },
+    dmg: ({ talent }, dmg) => dmg(talent.a['空中攻击·星星花绽放第一段伤害'], 'a,a3')
+  },
+  {
+    title: `${TalentName.a3Name}星星花绽放二段`,
+    params: { PlungingUse: 2, PlungingHit: 2, PlungingDmg: 2, fly: true, Photosynthesis_Energy: 3, HealNumber: 2 },
+    dmg: ({ talent }, dmg) => dmg(talent.a['空中攻击·星星花绽放第二段伤害'], 'a,a3')
+  },
+  {
+    title: `${TalentName.a3Name}星星花绽放三段`,
+    params: { PlungingUse: 3, PlungingHit: 5, PlungingDmg: 5, fly: true, Photosynthesis_Energy: 2, HealNumber: 3 },
+    dmg: ({ talent }, dmg) => {
+      let a3 = dmg(talent.a['空中攻击·星星花绽放第三段伤害2'][0], 'a,a3')
+      return {
+        dmg: a3.dmg * 3,
+        avg: a3.avg * 3
+      }
+    }
+  },
+  {
+    title: '星星花绽放治疗',
+    params: { NormalUse: 4, NormalHit: 6, NormalDmg: 6, HealNumber: 4, fly: true, Photosynthesis_Energy: 1 },
+    dmg: ({ attr, calc, talent }, { heal }) => heal(talent.t['星星花绽放治疗量2'][0] + talent.t['星星花绽放治疗量2'][1] * calc(attr.atk) / 100)
   },
   {
     title: `${TalentName.a4Name}伤害`,

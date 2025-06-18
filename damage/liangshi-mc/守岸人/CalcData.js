@@ -60,12 +60,12 @@ export const AllCalc = [
   {
     title: `${TalentName.a3Name}伤害`,
     params: { PlungingUse: 1, PlungingHit: 1, PlungingDmg: 1 },
-    dmg: ({ talent }, dmg) => dmg(talent.a['下落攻击伤害'], 'a3')
+    dmg: ({ talent }, dmg) => dmg(talent.a['下落攻击伤害'], 'a,a3')
   },
   {
     title: `${TalentName.a3Name}衍变伤害`,
     params: { PlungingUse: 1, PlungingHit: 1, PlungingDmg: 1 },
-    dmg: ({ talent }, dmg) => dmg(talent.t['衍变伤害'], 'a3')
+    dmg: ({ talent }, dmg) => dmg(talent.t['衍变伤害'], 'a,a3')
   },
   {
     title: `${TalentName.a4Name}伤害`,

@@ -146,18 +146,18 @@ export const AllCalc = [
   {
     title: `卡-${TalentName.a3Name}伤害`,
     params: { PlayName: "Cartethyia", PlungingUse: 1, PlungingHit: 1, PlungingDmg: 1, fly: true },
-    dmg: ({ talent, attr, calc }, { basic }) => basic(calc(attr.hp) * talent.a['空中攻击伤害'] / 100, 'a3')
+    dmg: ({ talent, attr, calc }, { basic }) => basic(calc(attr.hp) * talent.a['空中攻击伤害'] / 100, 'a,a3,erosion')
   },
   {
     title: `卡-${TalentName.a3Name}回收一剑`,
     params: { PlayName: "Cartethyia", PlungingUse: 1, PlungingHit: 2, PlungingDmg: 2 },
-    dmg: ({ talent, attr, calc }, { basic }) => basic(calc(attr.hp) * talent.a['空中攻击回收一剑'] / 100, 'a3')
+    dmg: ({ talent, attr, calc }, { basic }) => basic(calc(attr.hp) * talent.a['空中攻击回收一剑'] / 100, 'a,a3,erosion')
   },
   {
     title: `卡-${TalentName.a3Name}回收二剑`,
     params: { PlayName: "Cartethyia", PlungingUse: 1, PlungingHit: 5, PlungingDmg: 5 },
     dmg: ({ talent, attr, calc }, { basic }) => {
-      let a1 = basic(calc(attr.hp) * talent.a['空中攻击回收二剑2'][0] / 100, 'a3')
+      let a1 = basic(calc(attr.hp) * talent.a['空中攻击回收二剑2'][0] / 100, 'a,a3,erosion')
       return {
         dmg: a1.dmg * 3,
         avg: a1.avg * 3
@@ -168,7 +168,7 @@ export const AllCalc = [
     title: `卡-${TalentName.a3Name}回收三剑`,
     params: { PlayName: "Cartethyia", PlungingUse: 1, PlungingHit: 8, PlungingDmg: 8 },
     dmg: ({ talent, attr, calc }, { basic }) => {
-      let a1 = basic(calc(attr.hp) * talent.a['空中攻击回收三剑2'][0] / 100, 'a3')
+      let a1 = basic(calc(attr.hp) * talent.a['空中攻击回收三剑2'][0] / 100, 'a,a3,erosion')
       return {
         dmg: a1.dmg * 3,
         avg: a1.avg * 3
@@ -179,8 +179,8 @@ export const AllCalc = [
     title: `芙-${TalentName.a3Name}一段伤害`,
     params: ({ cons }) => ({ OwnHp: 50, Resolve: 120, PlayName: "Fleurdelys", Aero_Erosion: cons >= 2 ? 6 : 3, PlungingUse: 1, PlungingHit: 3, PlungingDmg: 3, fly: true }),
     dmg: ({ talent, attr, calc }, { basic }) => {
-      let a1 = basic(calc(attr.hp) * talent.t['空中攻击第一段伤害2'][0] / 100, 'a')
-      let a2 = basic(calc(attr.hp) * talent.t['空中攻击第一段伤害2'][1] / 100, 'a')
+      let a1 = basic(calc(attr.hp) * talent.t['空中攻击第一段伤害2'][0] / 100, 'a,a3')
+      let a2 = basic(calc(attr.hp) * talent.t['空中攻击第一段伤害2'][1] / 100, 'a,a3')
       return {
         dmg: a1.dmg * 2 + a2.dmg,
         avg: a1.avg * 2 + a2.avg
@@ -191,8 +191,8 @@ export const AllCalc = [
     title: `芙-${TalentName.a3Name}二段伤害`,
     params: ({ cons }) => ({ OwnHp: 50, Resolve: 120, PlayName: "Fleurdelys", Aero_Erosion: cons >= 2 ? 6 : 3, PlungingUse: 2, PlungingHit: 6, PlungingDmg: 6, fly: true }),
     dmg: ({ talent, attr, calc }, { basic }) => {
-      let a1 = basic(calc(attr.hp) * talent.t['空中攻击第二段伤害2'][0] / 100, 'a')
-      let a2 = basic(calc(attr.hp) * talent.t['空中攻击第二段伤害2'][1] / 100, 'a')
+      let a1 = basic(calc(attr.hp) * talent.t['空中攻击第二段伤害2'][0] / 100, 'a,a3')
+      let a2 = basic(calc(attr.hp) * talent.t['空中攻击第二段伤害2'][1] / 100, 'a,a3')
       return {
         dmg: a1.dmg * 2 + a2.dmg,
         avg: a1.avg * 2 + a2.avg
@@ -202,14 +202,14 @@ export const AllCalc = [
   {
     title: `芙-${TalentName.a3Name}三段伤害`,
     params: ({ cons }) => ({ OwnHp: 50, Resolve: 120, PlayName: "Fleurdelys", Aero_Erosion: cons >= 2 ? 6 : 3, PlungingUse: 3, PlungingHit: 7, PlungingDmg: 7, fly: true }),
-    dmg: ({ talent, attr, calc }, { basic }) => basic(calc(attr.hp) * talent.t['空中攻击第三段伤害'] / 100, 'a')
+    dmg: ({ talent, attr, calc }, { basic }) => basic(calc(attr.hp) * talent.t['空中攻击第三段伤害'] / 100, 'a,a3')
   },
   {
     title: `卡-${TalentName.eName}伤害`,
     params: { PlayName: "Cartethyia", SkillsUse: 1, SkillsHit: 4, SkillsDmg: 4 },
     dmg: ({ talent, attr, calc }, { basic }) => {
-      let e1 = basic(calc(attr.hp) * talent.e['技能伤害2'][0] / 100, 'e')
-      let e2 = basic(calc(attr.hp) * talent.e['技能伤害2'][1] / 100, 'e')
+      let e1 = basic(calc(attr.hp) * talent.e['技能伤害2'][0] / 100, 'a')
+      let e2 = basic(calc(attr.hp) * talent.e['技能伤害2'][1] / 100, 'a')
       return {
         dmg: e1.dmg * 3 + e2.dmg,
         avg: e1.avg * 3 + e2.avg
