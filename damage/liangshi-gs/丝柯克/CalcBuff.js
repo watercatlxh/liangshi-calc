@@ -22,6 +22,7 @@ MasteryGs,
   }
 },
 {
+  check: ({ params }) => params.BurstUse > 0,
   title: '丝柯克技能：[极恶技·尽] 施放极恶技·尽时，汲取了虚境裂隙[buff]枚,普通攻击造成的伤害进一步提高[aDmg]%',
   data: {
     buff: ({ params }) => params.Deaths_Crossing || 3,
