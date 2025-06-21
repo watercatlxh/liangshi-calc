@@ -6,6 +6,20 @@ enemyBuffGs,
 ImaginariumBuff,
 MasteryGs,
 {
+  title: '任务加成：[第三章 第一幕「穿越烟帷与暗林」] 在任务「近在咫尺的目标」中使用「单手剑战斗技巧•八」后，基础攻击力提升[_atkPlus]点 { 此效果暂不参与计算 }',
+  data: {
+    _atkPlus: 3
+  }
+},
+{
+  title: '任务加成：[磷星之章 第一幕「星与夜的低语」] 在任务「特训」中完成特训后，基础生命值提升[_hpPlus]点，基础攻击力提升[_atkPlus]点，元素精通提升[_masteryPlus] { 此效果暂不参与计算 }',
+  data: {
+    _hpPlus: 50,
+    _atkPlus: 10,
+    _masteryPlus: 15
+  }
+},
+{
   title: '旅行者天赋：[蔓生的埜草] 草灯莲将在其存在期间获得[buff]层莲光遍照效果，使其领域内的当前场上角色的元素精通提升[mastery]点元素精通。',
   check: ({ params }) => !params.TruceTime,
   data: {
