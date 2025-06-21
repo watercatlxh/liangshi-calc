@@ -241,7 +241,7 @@ export const AllCalc = [
     }
   },
   {
-    title: `芙-${TalentName.qName}伤害`, // 释放过程中进行移动等操作会提前进入卡提希娅状态使最后二段伤害丢失芙露德莉斯相关BUFF
+    title: `芙-${TalentName.qName}伤害`,
     params: ({ cons }) => ({ OwnHp: 50, Resolve: 120, PlayName: "Fleurdelys", Aero_Erosion: cons >= 2 ? 6 : 3, SkillsUse: 2, SkillsHit: 10, SkillsDmg: 10, BurstUse: 1, BurstHit: 7, BurstDmg: 7, EnergyUse: 1, fly: true }),
     dmg: ({ talent, attr, calc }, { basic }) => {
       let q1 = basic(calc(attr.hp) * talent.q['看潮怒风哮之刃伤害2'][0] / 100, 'q')
