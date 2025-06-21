@@ -4,6 +4,9 @@
 
 | 角色名字  | 基础计算 | 超全计算 | 基础评分 | 自适应评分 | 自定义 |                                         头像                                          |
 |:------|:----:|:----:|:----:|:-----:|:---:|:-----------------------------------------------------------------------------------:|
+| 伊涅芙    |  ×   |  ×   |  ×   |   ×   |  ×  |  ![头像](https://gitee.com/liangshi233/panel-img/raw/master/PanelCalc/伊涅芙/side.webp)   |
+| 塔利雅   |  ×   |  ×   |  ×   |   ×   |  ×  |  ![头像](https://gitee.com/liangshi233/panel-img/raw/master/PanelCalc/塔利雅/side.webp)  |
+| 丝柯克    |  ×   |  ×   |  ×   |   ×   |  ×  |  ![头像](https://gitee.com/liangshi233/panel-img/raw/master/PanelCalc/丝柯克/side.webp)   |
 | 伊法    |  ×   |  ×   |  ×   |   ×   |  ×  |  ![头像](https://gitee.com/liangshi233/panel-img/raw/master/PanelCalc/伊法/side.webp)   |
 | 爱可菲   |  ×   |  ×   |  ×   |   ×   |  ×  |  ![头像](https://gitee.com/liangshi233/panel-img/raw/master/PanelCalc/爱可菲/side.webp)  |
 | 瓦雷莎   |  √   |  ×   |  ×   |   ×   |  √  |  ![头像](https://gitee.com/liangshi233/panel-img/raw/master/PanelCalc/瓦雷莎/side.webp)  |
